@@ -8,7 +8,7 @@ const Profile = () => {
   
       <SafeAreaView>
        <View>
-         <Text>Mai Intro Nahi hoon</Text>
+         <Text>Mai Intro N</Text>
   
   
        </View>
