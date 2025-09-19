@@ -1,6 +1,6 @@
-import { StyleSheet, View, Animated } from 'react-native'
+import { StyleSheet, View, Animated , Image } from 'react-native'
 import React from 'react'
-import { ImageBackground, Image } from 'expo-image';
+import { ImageBackground } from 'expo-image';
 
 const IntroBackground = () => {
   const fadeAnim = React.useRef(new Animated.Value(0)).current;   // start invisible

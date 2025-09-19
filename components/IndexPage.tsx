@@ -114,8 +114,11 @@ const IndexPage = () => {
 
   return (
     <View style={styles.container}>
-      <TextInput placeholder='Search Books' style={styles.textInput} />
 
+
+
+
+      <TextInput placeholder='Search Books' style={styles.textInput} />
       <FlatList
         data={booksData}
         horizontal
@@ -137,8 +140,9 @@ const IndexPage = () => {
         )}
         keyExtractor={(item) => item.id.toString()}
       />
-
       <ScrollView>
+
+
 
         <ReuseBooksView slice1={0} slice2={6} heading1="Best Sellers" heading2="Best Sellers" data={booksData2} />
         <ReuseBooksView slice1={0} slice2={6} heading1="Best Sellers" heading2="Best Sellers" data={booksData2} />
@@ -148,6 +152,8 @@ const IndexPage = () => {
         <ReuseBooksView slice1={0} slice2={6} heading1="Best Sellers" heading2="Best Sellers" data={booksData2} />
         <Footer />
       </ScrollView>
+
+
 
 
 

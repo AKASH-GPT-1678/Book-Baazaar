@@ -1,8 +1,7 @@
 import IndexPage from '@/components/IndexPage';
 import IntroBackground from '@/components/introbackground';
-import { Image } from 'expo-image';
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import {  StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const HomeScreen = () => {
@@ -18,6 +17,9 @@ const HomeScreen = () => {
 
 
   }, []);
+
+
+  if(showIntro) return <IntroBackground/>;
 
 
 
