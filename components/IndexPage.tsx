@@ -1,9 +1,9 @@
-import { StyleSheet, Text, View, TextInput, Pressable, FlatList, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, TextInput, Pressable, FlatList, ScrollView, Button } from 'react-native'
 import React from 'react';
 import { Image } from 'expo-image';
 import Footer from './footer';
 import ReuseBooksView from './booksdisplay';
-
+import {router} from "expo-router";
 const booksData = [
   { id: 1, category: "Fiction", book: "1984 by George Orwell", image: "https://res.cloudinary.com/dffepahvl/image/upload/v1757712982/lwzug8nbrdvephl8afvp.jpg" },
   { id: 2, category: "NonFiction", book: "Sapiens by Yuval Noah Harari", image: "https://res.cloudinary.com/dffepahvl/image/upload/v1757713031/p9grxnrc6qkvi45is0ir.jpg" },
@@ -115,6 +115,22 @@ const IndexPage = () => {
   return (
     <View style={styles.container}>
 
+      <View >
+        <Pressable className='bg-blue-500  rounded-2xl max-w-[120px] ml-auto mb-3 px-8 p-4'
+
+        onPress={()=> router.push("/signin")}
+        
+        
+        
+        
+        
+        >
+          <Text className='text-white '>Sign In</Text>
+        </Pressable>
+
+
+      </View>
+
 
 
 
@@ -139,8 +155,9 @@ const IndexPage = () => {
           </Pressable>
         )}
         keyExtractor={(item) => item.id.toString()}
+        className='mb-12'
       />
-      <ScrollView>
+      <ScrollView className=''>
 
 
 

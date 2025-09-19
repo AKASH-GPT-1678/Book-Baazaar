@@ -40,11 +40,12 @@ const ReuseBooksView: React.FC<Props> = ({
         {heading2 && <Text className="text-sm text-gray-600">{heading2}</Text>}
       </View>
 
-    
+
       <FlatList
         data={product}
         numColumns={3}
         keyExtractor={(item) => item.id.toString()}
+        scrollEnabled={false}
         renderItem={({ item }) => (
           <View className="w-[140px] p-1 mb-5">
             <View className="bg-white rounded-xl shadow-sm p-2 relative h-[220px]">
@@ -58,7 +59,7 @@ const ReuseBooksView: React.FC<Props> = ({
                 <Text className="text-[10px] font-bold text-green-600">ADD</Text>
               </Pressable>
 
-          
+
               <View className="mt-2">
                 <Text className="text-[10px] text-gray-500">{item.quantity}</Text>
                 <Text

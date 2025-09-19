@@ -5,13 +5,13 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Orders = () => {
   return (
-      <SafeAreaView>
-         <View>
-           <Text>Mai Intro Nahi hoon</Text>
-    
-    
-         </View>
-         </SafeAreaView>
+    <SafeAreaView>
+      <View>
+        <Text>Mai Intro Nahi hoon</Text>
+
+
+      </View>
+    </SafeAreaView>
 
   )
 }
