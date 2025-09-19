@@ -1,6 +1,8 @@
 import { StyleSheet, Text, TextInput, View, Button, Pressable } from 'react-native'
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Image } from 'expo-image';
+import { router } from 'expo-router';
 
 const SignIn = () => {
     return (
@@ -50,7 +52,43 @@ const SignIn = () => {
                     <View style={styles.forgotPasswordContainer}>
                         <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
                     </View>
+
+
+
                 </View>
+                <View style={{ marginTop: 32, display: 'flex', flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+                    <Text>--Or Sign in with--</Text>
+                    <View className='mt-14 flex flex-row gap-10'>
+                        <Image source={require('../assets/images/google.png')} alt='google' style={{ height: 30, width: 30 }} />
+                        <Image
+                            source={require('../assets/images/facebook.png')}
+                            alt='facebook'
+                            style={{ height: 30, width: 30 }}
+                        />
+
+                        <Image
+                            source={require('../assets/images/twitter.png')}
+                            alt='twitter'
+                            style={{ height: 30, width: 30 }}
+                        />
+
+
+                    </View>
+
+                    <View className='flex flex-row gap-1 mt-20'>
+                        <Text>Dont't have an account ? </Text>
+                        <Text className='font-bold text-blue-600'
+                        onPress={() => router.push("/signup")}
+                        
+                        
+                        
+                        
+                        >Sign Up</Text>
+                    </View>
+
+                </View>
+
+
             </View>
         </SafeAreaView>
     );
@@ -108,22 +146,22 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         marginTop: 28,
-        alignItems: "center",   
-      },
-      loginButton: {
+        alignItems: "center",
+    },
+    loginButton: {
         backgroundColor: "#007AFF",
         paddingVertical: 14,
         paddingHorizontal: 32,
         borderRadius: 12,
-        width: "100%",      
-        alignItems: "center",   
-      },
-      loginButtonText: {
+        width: "100%",
+        alignItems: "center",
+    },
+    loginButtonText: {
         color: "#FFFFFF",
         fontSize: 16,
         fontWeight: "600",
-      },
-      
+    },
+
     forgotPasswordContainer: {
         alignItems: 'center',
         marginTop: 24,
