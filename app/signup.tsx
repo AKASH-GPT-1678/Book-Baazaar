@@ -4,24 +4,75 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Image } from 'expo-image';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { router } from 'expo-router';
-
+import axios from 'axios';
+import { useOAuth } from "@clerk/clerk-expo";
 const SignUp = () => {
-  
+    const googleOAuth = useOAuth({ strategy: "oauth_google" });
+    const githubAuth = useOAuth({ strategy: "oauth_github" });
+    const facebookAuth = useOAuth({ strategy: "oauth_facebook" });
+    const [email, setEmail] = React.useState<string>("");
+    const [password, setPassword] = React.useState<string>("");
+    const [confirmPassword, setConfirmPassword] = React.useState<string>("");
+    const BASE_URL = process.env.EXPO_PUBLIC_API_URL;
+
+    const [emptyError, setemptyError] = React.useState<boolean>()
+
+    const handleSignIn = async (providerOAuth: any) => {
+        try {
+            const { createdSessionId, setActive } = await providerOAuth.startOAuthFlow();
+
+            if (createdSessionId) {
+                setActive?.({ session: createdSessionId });
+            }
+        } catch (err) {
+            console.error("OAuth error", err);
+        }
+    };
+
+    const handleSignUp = async () => {
+        console.log(BASE_URL);
+        if (!BASE_URL) {
+            console.warn("No Base Url for Backend");
+            return;
+        }
+        try {
+            if (!email || !password || !confirmPassword) {
+                setemptyError(true);
+                return;
+            } else {
+                setemptyError(false);
+            }
+
+            const response = await axios.post(`${BASE_URL}/user/create`, {
+                name: email,
+                email: email,
+                password: password,
+                confirmPassword: confirmPassword
+            });
+
+            console.log("User created:", response.data);
+            return response.data;
+
+        } catch (error: any) {
+            console.error("Sign up failed:", error.response?.data || error.message);
+        }
+    };
+
+
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.sidedisplay} className='relative'>
-            <Ionicons name="arrow-back" size={26} color="black" className='absolute left-4' 
-            onPress={()=> router.back()}
-            
-            
-            
-            />
+                <Ionicons name="arrow-back" size={26} color="black" className='absolute left-4'
+                    onPress={() => router.back()}
+
+
+
+                />
                 <Text style={styles.header}>BookBaazar</Text>
 
                 <View style={styles.view1}>
                     <Text style={styles.loginTitle}>Create your Account</Text>
 
-                    {/* Email */}
                     <View style={styles.inputContainer}>
                         <Text style={styles.label}>Email</Text>
                         <TextInput
@@ -31,6 +82,7 @@ const SignUp = () => {
                             keyboardType="email-address"
                             autoCapitalize="none"
                             autoCorrect={false}
+                            onChangeText={(text) => setEmail(text)}
                         />
                     </View>
 
@@ -43,6 +95,7 @@ const SignUp = () => {
                             placeholderTextColor="#A1A1A1"
                             secureTextEntry={true}
                             autoCapitalize="none"
+                            onChangeText={(text) => setPassword(text)}
                         />
                     </View>
 
@@ -55,29 +108,68 @@ const SignUp = () => {
                             placeholderTextColor="#A1A1A1"
                             secureTextEntry={true}
                             autoCapitalize="none"
+                            onChangeText={(text) => setConfirmPassword(text)}
                         />
                     </View>
 
-                  
+
                     <View style={styles.buttonContainer}>
                         <Pressable
                             style={styles.loginButton}
-                            onPress={() => console.log('Sign Up pressed')}
+                            onPress={() => handleSignUp()}
                         >
                             <Text style={styles.loginButtonText}>Sign Up</Text>
                         </Pressable>
+
+                        {emptyError && <Text className='text-red-600 font-medium'>Values Cannot be empty</Text>}
                     </View>
                 </View>
 
-                {/* Or sign up with */}
-                <View style={{ marginTop: 40, display: 'flex', flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
-                    <Text>--Or Sign up with--</Text>
-                    <View style={{ marginTop: 24, flexDirection: "row", gap: 20 }}>
-                        <Image source={require('../assets/images/google.png')} alt='google' style={{ height: 30, width: 30 }} />
-                        <Image source={require('../assets/images/facebook.png')} alt='facebook' style={{ height: 30, width: 30 }} />
-                        <Image source={require('../assets/images/twitter.png')} alt='twitter' style={{ height: 30, width: 30 }} />
+                <View style={{ marginTop: 32, display: 'flex', flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+                    <Text>--Or Sign in with--</Text>
+                    <View className='mt-14 flex flex-row gap-10'>
+
+
+
+                        <Pressable onPress={() => handleSignIn(googleOAuth)}>
+                            <Image
+                                source={require("../assets/images/google.png")}
+                                style={{ height: 30, width: 30 }}
+                            />
+                        </Pressable>
+
+
+                        <Pressable onPress={() => handleSignIn(facebookAuth)}>
+                            <Image
+                                source={require("../assets/images/facebook.png")}
+                                style={{ height: 30, width: 30 }}
+                            />
+                        </Pressable>
+
+
+                        <Pressable onPress={() => handleSignIn(githubAuth)}>
+                            <Image
+                                source={require("../assets/images/github.png")}
+                                style={{ height: 30, width: 30 }}
+                            />
+                        </Pressable>
+
+
                     </View>
+
+                    <View className='flex flex-row gap-1 mt-20'>
+                        <Text>Dont't have an account ? </Text>
+                        <Text className='font-bold text-blue-600'
+                            onPress={() => router.push("/signup")}
+
+
+
+
+                        >Sign Up</Text>
+                    </View>
+
                 </View>
+
             </View>
         </SafeAreaView>
     );
