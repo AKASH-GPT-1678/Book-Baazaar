@@ -3,8 +3,32 @@ import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Image } from 'expo-image';
 import { router } from 'expo-router';
+import { useSignIn, useSignUp } from '@clerk/clerk-expo';
+import * as WebBrowser from "expo-web-browser";
+import { useOAuth } from "@clerk/clerk-expo";
 
-const SignIn = () => {
+WebBrowser.maybeCompleteAuthSession();
+const SignInn = () => {
+    const googleOAuth = useOAuth({ strategy: "oauth_google" });
+    const githubAuth = useOAuth({ strategy: "oauth_github" });
+    const facebookAuth = useOAuth({ strategy: "oauth_facebook" });
+
+    const handleSignIn = async (providerOAuth: any) => {
+        try {
+            const { createdSessionId, setActive } = await providerOAuth.startOAuthFlow();
+
+            if (createdSessionId) {
+                setActive?.({ session: createdSessionId });
+            }
+        } catch (err) {
+            console.error("OAuth error", err);
+        }
+    };
+
+
+
+
+ 
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.sidedisplay}>
@@ -59,18 +83,31 @@ const SignIn = () => {
                 <View style={{ marginTop: 32, display: 'flex', flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
                     <Text>--Or Sign in with--</Text>
                     <View className='mt-14 flex flex-row gap-10'>
-                        <Image source={require('../assets/images/google.png')} alt='google' style={{ height: 30, width: 30 }} />
-                        <Image
-                            source={require('../assets/images/facebook.png')}
-                            alt='facebook'
-                            style={{ height: 30, width: 30 }}
-                        />
 
-                        <Image
-                            source={require('../assets/images/twitter.png')}
-                            alt='twitter'
-                            style={{ height: 30, width: 30 }}
-                        />
+
+
+                        <Pressable onPress={() => handleSignIn(googleOAuth)}>
+                            <Image
+                                source={require("../assets/images/google.png")}
+                                style={{ height: 30, width: 30 }}
+                            />
+                        </Pressable>
+
+
+                        <Pressable onPress={() => handleSignIn(facebookAuth)}>
+                            <Image
+                                source={require("../assets/images/facebook.png")}
+                                style={{ height: 30, width: 30 }}
+                            />
+                        </Pressable>
+
+
+                        <Pressable onPress={() => handleSignIn(githubAuth)}>
+                            <Image
+                                source={require("../assets/images/github.png")}
+                                style={{ height: 30, width: 30 }}
+                            />
+                        </Pressable>
 
 
                     </View>
@@ -78,11 +115,11 @@ const SignIn = () => {
                     <View className='flex flex-row gap-1 mt-20'>
                         <Text>Dont't have an account ? </Text>
                         <Text className='font-bold text-blue-600'
-                        onPress={() => router.push("/signup")}
-                        
-                        
-                        
-                        
+                            onPress={() => router.push("/signup")}
+
+
+
+
                         >Sign Up</Text>
                     </View>
 
@@ -94,7 +131,7 @@ const SignIn = () => {
     );
 };
 
-export default SignIn;
+export default SignInn;
 
 const styles = StyleSheet.create({
     container: {
