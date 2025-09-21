@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { MaterialIcons, Ionicons, AntDesign, Feather } from '@expo/vector-icons';
@@ -6,10 +5,10 @@ import { MaterialIcons, Ionicons, AntDesign, Feather } from '@expo/vector-icons'
 const DeliveryDetailsComponent = () => {
   return (
     <View style={styles.container}>
-      {/* Delivery Details Header */}
+     
       <Text style={styles.header}>Delivery details</Text>
       
-      {/* Home Address Section */}
+
       <TouchableOpacity style={styles.addressContainer}>
         <View style={styles.addressContent}>
           <MaterialIcons name="home" size={20} color="#666" style={styles.icon} />
@@ -21,7 +20,7 @@ const DeliveryDetailsComponent = () => {
         <MaterialIcons name="chevron-right" size={20} color="#666" />
       </TouchableOpacity>
 
-      {/* Delivery Time Section */}
+ 
       <View style={styles.deliveryContainer}>
         <View style={styles.deliveryHeader}>
           <MaterialIcons name="local-shipping" size={20} color="#666" style={styles.icon} />
@@ -30,7 +29,7 @@ const DeliveryDetailsComponent = () => {
         <Text style={styles.countdownText}>Order in 00h 17m 32s</Text>
       </View>
 
-      {/* Fulfilled By Section */}
+    
       <View style={styles.fulfilledContainer}>
         <View style={styles.fulfilledHeader}>
           <Ionicons name="cube-outline" size={20} color="#666" style={styles.icon} />
@@ -41,7 +40,7 @@ const DeliveryDetailsComponent = () => {
         </View>
       </View>
 
-      {/* Warranty Section */}
+
       <View style={styles.warrantyContainer}>
         <View style={styles.warrantyContent}>
           <View style={styles.noiseBrand}>
@@ -51,7 +50,7 @@ const DeliveryDetailsComponent = () => {
         </View>
       </View>
 
-      {/* Features Section */}
+      
       <View style={styles.featuresContainer}>
         {/* 7-day brand support */}
         <TouchableOpacity style={styles.featureItem}>
@@ -65,7 +64,7 @@ const DeliveryDetailsComponent = () => {
           </View>
         </TouchableOpacity>
 
-        {/* No cash on delivery */}
+   
         <TouchableOpacity style={styles.featureItem}>
           <View style={styles.featureIcon}>
             <MaterialIcons name="credit-card-off" size={24} color="#3B82F6" />
@@ -77,7 +76,7 @@ const DeliveryDetailsComponent = () => {
           </View>
         </TouchableOpacity>
 
-        {/* Flipkart Assured */}
+      
         <TouchableOpacity style={styles.featureItem}>
           <View style={styles.featureIcon}>
             <MaterialIcons name="verified-user" size={24} color="#3B82F6" />

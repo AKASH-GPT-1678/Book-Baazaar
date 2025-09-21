@@ -1,11 +1,14 @@
 import IndexPage from '@/components/IndexPage';
 import IntroBackground from '@/components/introbackground';
 import React from 'react';
-import {  StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
+import { useSearchParams } from 'expo-router/build/hooks';
 const HomeScreen = () => {
   const [showIntro, setShowIntro] = React.useState(true);
+  const searchParam = useSearchParams();
+  const isDiverted = searchParam.get("diverted");
+
 
   React.useEffect(() => {
 
@@ -19,19 +22,19 @@ const HomeScreen = () => {
   }, []);
 
 
-  if(showIntro) return <IntroBackground/>;
+  if (showIntro && !isDiverted) return <IntroBackground />;
 
 
 
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-    
+
 
 
 
       <IndexPage />
-  
+
 
     </SafeAreaView>
 

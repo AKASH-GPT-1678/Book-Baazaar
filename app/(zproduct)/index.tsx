@@ -5,11 +5,11 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Image } from 'react-native';
 import Entypo from '@expo/vector-icons/Entypo';
 import Feather from '@expo/vector-icons/Feather';
-import { Link } from 'expo-router';
+import { Link, router } from 'expo-router';
 import ProductHighlights from '@/components/higlights';
 import DeliveryDetailsComponent from '@/components/deliveryDetails';
 import RatingsAndReviewsComponent from '@/components/reviews';
-
+import ProductNotFound from '@/components/productNotfound';
 
 const ProductView = () => {
     const searchParams = useSearchParams();
@@ -17,7 +17,9 @@ const ProductView = () => {
     const [active, setActive] = React.useState(0);
     const dataPoints = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-    if (!productId) return <View><Text>Nothing is Here </Text></View>
+    if (!productId) return <View className='flex items-center justify-center h-screen'>
+        <ProductNotFound />
+    </View>
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -102,7 +104,16 @@ const ProductView = () => {
                 <Pressable style={styles.bottomButton} className='justify-center rounded-xl border border-gray-400'>
                     <Text className='text-center font-semibold '>Add to Cart</Text>
                 </Pressable>
-                <Pressable style={styles.bottomButton} className='bg-yellow-400 rounded-xl'>
+                <Pressable style={styles.bottomButton} className='bg-yellow-400 rounded-xl'
+                    onPress={() => router.replace({
+                        pathname: "/(zproduct)/purchase",
+                        params: { productId: 1234 }
+                    })}
+
+
+
+
+                >
                     <Text className='text-center font-semibold'>Buy Now</Text>
                     <Text className='text-center font-semibold'>at 999</Text>
                 </Pressable>
