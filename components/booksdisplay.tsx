@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Image, Pressable, FlatList } from "react-native";
 import Ratings from "./ratings";
-
+import { router } from "expo-router";
 export type Item = {
   id: number;
   name: string;
@@ -20,7 +20,7 @@ interface Props {
   heading2?: string;
   bgUrl?: string;
   data: Item[];
-}
+};
 
 const ReuseBooksView: React.FC<Props> = ({
   data: products,
@@ -47,42 +47,48 @@ const ReuseBooksView: React.FC<Props> = ({
         keyExtractor={(item) => item.id.toString()}
         scrollEnabled={false}
         renderItem={({ item }) => (
-          <View className="w-[140px] p-1 mb-5">
-            <View className="bg-white rounded-xl shadow-sm p-2 relative h-[220px]">
-              <Image
-                source={{ uri: item.image }}
-                className="h-[100px] w-full rounded-lg"
-                resizeMode="cover"
-              />
+          <Pressable onPress={() => router.push({
+            pathname: "/(zproduct)",
+            params: { productId: item.id.toString() }
+          })}>
+            <View className="w-[140px] p-1 mb-5"  >
+              <View className="bg-white rounded-xl shadow-sm p-2 relative h-[220px]">
+                <Image
+                  source={{ uri: item.image }}
+                  className="h-[100px] w-full rounded-lg"
+                  resizeMode="cover"
 
-              <Pressable className="absolute top-[85px] right-2 bg-white border border-green-600 rounded px-2 py-0.5">
-                <Text className="text-[10px] font-bold text-green-600">ADD</Text>
-              </Pressable>
+                />
+
+                <Pressable className="absolute top-[85px] right-2 bg-white border border-green-600 rounded px-2 py-0.5">
+                  <Text className="text-[10px] font-bold text-green-600">ADD</Text>
+                </Pressable>
 
 
-              <View className="mt-2">
-                <Text className="text-[10px] text-gray-500">{item.quantity}</Text>
-                <Text
-                  className="text-xs font-semibold text-gray-800"
-                  numberOfLines={1}
-                >
-                  {item.name}
-                </Text>
-                <Text className="text-[10px] text-gray-500">
-                  {item.deliveryTime}
-                </Text>
-                <Ratings rating={item.rating} />
-                <Text className="text-sm font-bold text-green-700">
-                  ₹ {item.price}
+                <View className="mt-2">
+                  <Text className="text-[10px] text-gray-500">{item.quantity}</Text>
+                  <Text
+                    className="text-xs font-semibold text-gray-800"
+                    numberOfLines={1}
+                  >
+                    {item.name}
+                  </Text>
+                  <Text className="text-[10px] text-gray-500">
+                    {item.deliveryTime}
+                  </Text>
+                  <Ratings rating={item.rating} />
+                  <Text className="text-sm font-bold text-green-700">
+                    ₹ {item.price}
+                  </Text>
+                </View>
+
+                {/* Footer Tag */}
+                <Text className="bg-green-100 text-[9px] text-center text-green-700 rounded-b-lg mt-2">
+                  See More Like This
                 </Text>
               </View>
-
-              {/* Footer Tag */}
-              <Text className="bg-green-100 text-[9px] text-center text-green-700 rounded-b-lg mt-2">
-                See More Like This
-              </Text>
             </View>
-          </View>
+          </Pressable>
         )}
         ListFooterComponent={() => (
           <View className="py-4">

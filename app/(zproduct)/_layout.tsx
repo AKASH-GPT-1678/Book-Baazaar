@@ -1,0 +1,20 @@
+import { Stack, Tabs } from 'expo-router';
+import React from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
+export default function ProductLayout() {
+
+
+
+
+    return (
+
+        <Stack>
+       
+                <Stack.Screen name='index' options={{ headerShown: false }} />
+       
+
+        </Stack>
+
+    )
+}

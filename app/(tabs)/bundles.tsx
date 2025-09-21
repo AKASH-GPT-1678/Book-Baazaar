@@ -107,7 +107,7 @@ const Bundles = () => {
             <View style={styles.views}>
 
 
-                <ReuseBooksView heading1='Making' heading2='Making2' slice1={0} slice2={6} data={booksData2} />
+                <ReuseBooksView heading1='Competetive Bundle' heading2='JEE/NEET/Board' slice1={0} slice2={6} data={booksData2} />
             </View>
 
 

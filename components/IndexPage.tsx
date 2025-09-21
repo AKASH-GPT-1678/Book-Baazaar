@@ -118,7 +118,10 @@ const IndexPage = () => {
       <View >
         <Pressable className='bg-blue-500  rounded-2xl max-w-[120px] ml-auto mb-3 px-8 p-4'
 
-          onPress={() => router.push("/signin")}
+          onPress={() => router.push({
+            pathname : "/(zproduct)",
+            params : {"productid": 124556}
+          })}
 
         >
           <Text className='text-white '>Sign In</Text>

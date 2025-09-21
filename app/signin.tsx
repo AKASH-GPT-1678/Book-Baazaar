@@ -6,6 +6,7 @@ import { router } from 'expo-router';
 import { useSignIn, useSignUp } from '@clerk/clerk-expo';
 import * as WebBrowser from "expo-web-browser";
 import { useOAuth } from "@clerk/clerk-expo";
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 WebBrowser.maybeCompleteAuthSession();
 const SignInn = () => {
@@ -31,7 +32,13 @@ const SignInn = () => {
  
     return (
         <SafeAreaView style={styles.container}>
-            <View style={styles.sidedisplay}>
+            <View style={styles.sidedisplay} className='relative'>
+            <Ionicons name="arrow-back" size={26} color="black" className='absolute left-4'
+                    onPress={() => router.back()}
+
+
+
+                />
                 <Text style={styles.header}>BookBaazar</Text>
 
                 <View style={styles.view1}>
