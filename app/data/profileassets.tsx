@@ -35,29 +35,20 @@ export const profileAssets = [
         "title": "Payments & Earnings",
         "icon": <AntDesign name="credit-card" size={24} color="black" />
     },
-    {
-        "title": "Languages",
-        "icon": <Entypo name="globe" size={24} color="black" />
-    },
-    {
-        "title": "Location / Address",
-        "icon": <FontAwesome5 name="location-arrow" size={24} color="black" />
-    },
+
+
     {
         "title": "Subscription / Premium",
         "icon": <MaterialIcons name="subscriptions" size={24} color="black" />
     },
-    {
-        "title": "Display / App Theme",
-        "icon": <FontAwesome6 name="display" size={24} color="black" />
-    },
+ 
     {
         "title": "Help & Support",
         "icon": <Entypo name="help" size={24} color="black" />
     },
     {
-        "title": "Log Out",
-        "icon": <MaterialIcons name="logout" size={24} color="black" />
+        "title": "LogOut",
+        "icon": <MaterialIcons name="logout" size={24} color="red" />
     }
 ]
 

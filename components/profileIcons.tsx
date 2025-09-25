@@ -10,10 +10,10 @@ interface ProfileProps {
 const ProfileNavigation: React.FC<ProfileProps> = ({ leftIcon, title }) => {
     return (
         <View>
-            <View className=' p-6 flex flex-row justify-between border border-gray-200 mt-2'>
+            <View className=' p-5 pr-12 flex flex-row justify-between  mt-2 border-b-2'>
                 {leftIcon}
-                <Text className='text-lg'>{title}</Text>
-                <Ionicons name="arrow-forward" size={24} color="black" />
+                <Text className={`text-lg font-bold ${title === "LogOut" ? "text-red-600" : "text-black"}`}>{title}</Text>
+                <Ionicons name="arrow-forward" size={24} color={`${title === "LogOut" ? "red" : "black"}`} />
 
 
             </View>
@@ -22,6 +22,6 @@ const ProfileNavigation: React.FC<ProfileProps> = ({ leftIcon, title }) => {
     )
 }
 
-export default ProfileNavigation
+export default ProfileNavigation;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});
