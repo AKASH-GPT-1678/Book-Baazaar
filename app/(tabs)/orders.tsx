@@ -7,7 +7,7 @@ const Orders = () => {
   return (
     <SafeAreaView>
       <View>
-        <Text>Mai Intro Nahi hoon</Text>
+        <Text>Mai Intro Nahi hoon baap hu apka</Text>
 
 
       </View>

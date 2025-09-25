@@ -43,3 +43,4 @@ app-example
 /android
 app/Env.ts
 *.env
+bookassets

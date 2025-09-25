@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TextInput, Pressable, FlatList, ScrollView, Button } from 'react-native'
+import { StyleSheet, Text, View, TextInput, Pressable, FlatList, ScrollView } from 'react-native'
 import React from 'react';
 import { Image } from 'expo-image';
 import Footer from './footer';
@@ -119,8 +119,8 @@ const IndexPage = () => {
         <Pressable className='bg-blue-500  rounded-2xl max-w-[120px] ml-auto mb-3 px-8 p-4'
 
           onPress={() => router.push({
-            pathname : "/(zproduct)",
-            params : {"productid": 124556}
+            pathname: "/signin",
+
           })}
 
         >
@@ -196,6 +196,7 @@ const styles = StyleSheet.create({
   },
   listContent: {
     paddingHorizontal: 8,
+    marginBottom: 40,
   },
   itemContainer: {
     alignItems: "center",
