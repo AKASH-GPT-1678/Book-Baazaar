@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TextInput, View, Pressable } from 'react-native';
+import { StyleSheet, Text, TextInput, View, Pressable, Alert } from 'react-native';
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Image } from 'expo-image';
@@ -42,8 +42,12 @@ const SignUp = () => {
             } else {
                 setemptyError(false);
             }
+            if (password != confirmPassword) {
+                console.log("Password and Confirm Password Should matrhc");
+                return;
+            }
 
-            const response = await axios.post(`${BASE_URL}/user/create`, {
+            const response = await axios.post(`${BASE_URL}/api/user/create`, {
                 name: email,
                 email: email,
                 password: password,
@@ -51,7 +55,12 @@ const SignUp = () => {
             });
 
             console.log("User created:", response.data);
+            if (response.data.success == true) {
+                Alert.alert("Youve Signed up Sucessfully");
+                router.push("/signin")
+            }
             return response.data;
+
 
         } catch (error: any) {
             console.error("Sign up failed:", error.response?.data || error.message);
@@ -99,7 +108,7 @@ const SignUp = () => {
                         />
                     </View>
 
-             
+
                     <View style={styles.inputContainer}>
                         <Text style={styles.label}>Confirm Password</Text>
                         <TextInput

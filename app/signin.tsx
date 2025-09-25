@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TextInput, View, Button, Pressable } from 'react-native'
+import { StyleSheet, Text, TextInput, View, Button, Pressable, Alert } from 'react-native'
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Image } from 'expo-image';
@@ -7,12 +7,19 @@ import { useSignIn, useSignUp } from '@clerk/clerk-expo';
 import * as WebBrowser from "expo-web-browser";
 import { useOAuth } from "@clerk/clerk-expo";
 import Ionicons from '@expo/vector-icons/Ionicons';
+import axios from 'axios';
 
 WebBrowser.maybeCompleteAuthSession();
 const SignInn = () => {
     const googleOAuth = useOAuth({ strategy: "oauth_google" });
     const githubAuth = useOAuth({ strategy: "oauth_github" });
     const facebookAuth = useOAuth({ strategy: "oauth_facebook" });
+    const [email, setEmail] = React.useState("");       // state for email
+    const [password, setPassword] = React.useState(""); // state for password
+
+    const BASE_URL = process.env.EXPO_PUBLIC_API_URL;
+
+
 
     const handleSignIn = async (providerOAuth: any) => {
         try {
@@ -26,14 +33,40 @@ const SignInn = () => {
         }
     };
 
+    const handleManualSignIn = async () => {
+        console.log("working")
+        Alert.alert("I am working")
+        if (!BASE_URL) return { success: false, message: "BASE_URL is not defined" };
+        if (!email || !password)
+            return { success: false, message: "Email and password are required" };
+
+        try {
+            const response = await axios.post(`${BASE_URL}/api/user/login`, {
+                email,
+                password,
+            });
+            console.log(response.data)
+
+            if (response?.data?.success) {
+                Alert.alert("Sucessfull SigniN ")
+                return { success: true, data: response.data };
+            } else {
+                return { success: false, message: response?.data?.message || "Login failed" };
+            }
+        } catch (error: any) {
+            return { success: false, message: error.message || "Something went wrong" };
+        }
+    };
 
 
 
- 
+
+
+
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.sidedisplay} className='relative'>
-            <Ionicons name="arrow-back" size={26} color="black" className='absolute left-4'
+                <Ionicons name="arrow-back" size={26} color="black" className='absolute left-4'
                     onPress={() => router.back()}
 
 
@@ -54,6 +87,8 @@ const SignInn = () => {
                             keyboardType="email-address"
                             autoCapitalize="none"
                             autoCorrect={false}
+                            onChangeText={(text) => setEmail(text)}
+
                         />
                     </View>
 
@@ -66,13 +101,14 @@ const SignInn = () => {
                             placeholderTextColor="#A1A1A1"
                             secureTextEntry={true}
                             autoCapitalize="none"
+                            onChangeText={(text) => setPassword(text)}
                         />
                     </View>
 
                     <View style={styles.buttonContainer}>
                         <Pressable
                             style={styles.loginButton}
-                            onPress={() => console.log('Login pressed')}
+                            onPress={() => handleManualSignIn()}
                         >
                             <Text style={styles.loginButtonText}>Log In</Text>
                         </Pressable>
