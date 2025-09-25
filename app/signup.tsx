@@ -99,7 +99,7 @@ const SignUp = () => {
                         />
                     </View>
 
-                    {/* Confirm Password */}
+             
                     <View style={styles.inputContainer}>
                         <Text style={styles.label}>Confirm Password</Text>
                         <TextInput
@@ -160,7 +160,7 @@ const SignUp = () => {
                     <View className='flex flex-row gap-1 mt-20'>
                         <Text>Dont't have an account ? </Text>
                         <Text className='font-bold text-blue-600'
-                            onPress={() => router.push("/signup")}
+                            onPress={() => router.push("/(zseller)")}
 
 
 
