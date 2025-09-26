@@ -1,7 +1,9 @@
-import { StyleSheet, Text, View, Image, FlatList } from 'react-native'
+import { StyleSheet, Text, View, Image, FlatList, TouchableOpacity, Button, Pressable } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ListingData } from '@/data/mockBooks';
+import Feather from '@expo/vector-icons/Feather';
+import { router } from 'expo-router';
 
 export interface Book {
     book: string;
@@ -17,17 +19,30 @@ interface SellerListingProps {
 const SellerListing: React.FC<SellerListingProps> = ({ books }) => {
 
     const renderItem = ({ item }: { item: Book }) => (
-        <View style={styles.indiviDual}>
-            <Image
-                source={{ uri: item.image }}
-                style={styles.bookImage}
-            />
-            <Text style={styles.bookTitle}>{item.book}</Text>
-        </View>
+
+        <TouchableOpacity onPress={() => console.log(item.book)}>
+            <View style={styles.indiviDual}>
+                <Image
+                    source={{ uri: item.image }}
+                    style={styles.bookImage}
+                />
+                <Text style={styles.bookTitle}>{item.book}</Text>
+            </View>
+        </TouchableOpacity>
     );
 
     return (
         <SafeAreaView>
+            <View className='p-4'>
+                <Pressable className='flex flex-row max-w-40 text-center p-2 text-white items-center gap-2 bg-blue-400 py-2 px-4 rounded-lg'
+                onPress={() => router.push("/(zseller)/newproduct")}
+                
+                
+                >
+                    <Feather name="plus" size={24} color="black" />
+                    <Text>New Listing</Text>
+                </Pressable>
+            </View>
             <FlatList
                 data={books}
                 renderItem={renderItem}
@@ -52,7 +67,7 @@ const styles = StyleSheet.create({
         padding: 12,
         alignItems: "center",
         justifyContent: "center",
-        width: 180, 
+        width: 180,
         margin: 8,
         shadowColor: "#000",
         shadowOffset: { width: 0, height: 4 },
