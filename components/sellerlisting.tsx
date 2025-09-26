@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Image, FlatList, TouchableOpacity, Button, Pressable } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { ListingData } from '@/data/mockBooks';
+import { ENV } from '@/data/ENV';
 import Feather from '@expo/vector-icons/Feather';
 import { router } from 'expo-router';
 
@@ -10,12 +10,12 @@ export interface Book {
     image: string;
 }
 
-// Props type for the component
+
 interface SellerListingProps {
-    books: Book[]; // component expects a list of books
+    books: Book[]; 
 }
 
-// Functional component
+
 const SellerListing: React.FC<SellerListingProps> = ({ books }) => {
 
     const renderItem = ({ item }: { item: Book }) => (

@@ -4,6 +4,8 @@ import { Image } from 'expo-image';
 import Footer from './footer';
 import ReuseBooksView from './booksdisplay';
 import { router } from "expo-router";
+import { useSelector } from 'react-redux';
+import { RootState } from '@/app/store/store';
 const booksData = [
   { id: 1, category: "Fiction", book: "1984 by George Orwell", image: "https://res.cloudinary.com/dffepahvl/image/upload/v1757712982/lwzug8nbrdvephl8afvp.jpg" },
   { id: 2, category: "NonFiction", book: "Sapiens by Yuval Noah Harari", image: "https://res.cloudinary.com/dffepahvl/image/upload/v1757713031/p9grxnrc6qkvi45is0ir.jpg" },
@@ -111,12 +113,15 @@ export const booksData2: Item[] = [
 
 const IndexPage = () => {
   const [activeCategory, setActiveCategory] = React.useState("Fiction");
+  const token = useSelector((state: RootState) => state.user.token);
+  const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
+
 
   return (
     <View style={styles.container}>
 
       <View >
-        <Pressable className='bg-blue-500  rounded-2xl max-w-[120px] ml-auto mb-3 px-8 p-4'
+        {!isLoggedIn && <Pressable className='bg-blue-500  rounded-2xl max-w-[120px] ml-auto mb-3 px-8 p-4'
 
           onPress={() => router.push({
             pathname: "/signin",
@@ -125,7 +130,8 @@ const IndexPage = () => {
 
         >
           <Text className='text-white '>Sign In</Text>
-        </Pressable>
+
+        </Pressable>}
 
 
       </View>
