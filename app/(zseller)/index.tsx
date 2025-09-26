@@ -1,13 +1,16 @@
+import SellerListing from '@/components/sellerlisting';
+import { ListingData } from '@/data/mockBooks';
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 
-const index = () => {
+const Index = () => {
   return (
-    <div>
-        <Text>Namaste</Text>
-      
-    </div>
+    <View>
+      <SellerListing books={ListingData}/>
+    </View>
+
+
   )
 }
 
-export default index
+export default Index;

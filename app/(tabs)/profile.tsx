@@ -5,7 +5,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { Image } from 'react-native';
 import Feather from '@expo/vector-icons/Feather';
 import ProfileNavigation from '@/components/profileIcons';
-import { profileAssets } from '../data/profileassets';
+import { profileAssets } from '../../data/profileassets';
 import { router } from 'expo-router';
 const Profile = () => {
   return (

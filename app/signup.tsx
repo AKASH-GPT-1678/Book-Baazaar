@@ -95,7 +95,7 @@ const SignUp = () => {
                         />
                     </View>
 
-                    {/* Password */}
+            
                     <View style={styles.inputContainer}>
                         <Text style={styles.label}>Password</Text>
                         <TextInput
