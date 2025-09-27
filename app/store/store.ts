@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { combineReducers } from '@reduxjs/toolkit'
 
 import userReducer from "./slice/userSlice";
-// Persist configuration
+
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
@@ -12,17 +12,16 @@ const persistConfig = {
 
 }
 
-// Combine reducers
+
 const rootReducer = combineReducers({
 
   user: userReducer,
  
 })
 
-// Create persisted reducer
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
-// Configure store
+
 export const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
@@ -36,7 +35,7 @@ export const store = configureStore({
   devTools: __DEV__
 })
 
-export const persistor = persistStore(store)
+export const persistor = persistStore(store);
 
-export type RootState = ReturnType<typeof store.getState>
+export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

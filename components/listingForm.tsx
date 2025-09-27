@@ -1,9 +1,7 @@
 import { ScrollView, StyleSheet, Text, TextInput, View, Pressable, Switch, Alert } from 'react-native';
 import React from 'react';
-import Ionicons from '@expo/vector-icons/Ionicons';
 import { router } from 'expo-router';
 import axios from 'axios';
-import { ENV } from '@/data/ENV';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/app/store/store';
 import { Picker } from '@react-native-picker/picker';
