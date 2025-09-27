@@ -37,15 +37,21 @@ const SignInn = () => {
 
     const handleManualSignIn = async () => {
         console.log("working")
-        Alert.alert("I am working")
+        Alert.alert("I am working");
+        console.log(email , password)
         if (!BASE_URL) return { success: false, message: "BASE_URL is not defined" };
         if (!email || !password)
             return { success: false, message: "Email and password are required" };
 
         try {
             const response = await axios.post(`${BASE_URL}/api/auth/login`, {
-                email,
-                password,
+                "email": email.toString(),
+                "password" : password.toString()
+            }, {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                
             });
             console.log(response.data)
 
