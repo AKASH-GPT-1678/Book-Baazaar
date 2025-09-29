@@ -121,7 +121,7 @@ const IndexPage = () => {
     <View style={styles.container}>
 
       <View >
-        {!isLoggedIn && <Pressable className='bg-blue-500  rounded-2xl max-w-[120px] ml-auto mb-3 px-8 p-4'
+       <Pressable className='bg-blue-500  rounded-2xl max-w-[120px] ml-auto mb-3 px-8 p-4'
 
           onPress={() => router.push({
             pathname: "/signin",
@@ -131,7 +131,7 @@ const IndexPage = () => {
         >
           <Text className='text-white '>Sign In</Text>
 
-        </Pressable>}
+        </Pressable>
 
 
       </View>

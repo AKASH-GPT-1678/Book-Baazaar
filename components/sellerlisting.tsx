@@ -2,25 +2,25 @@ import { StyleSheet, Text, View, Image, FlatList, TouchableOpacity, Pressable } 
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Feather from '@expo/vector-icons/Feather';
-import { router } from 'expo-router';
+import { Link, router } from 'expo-router';
 import { ENV } from '@/data/ENV';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/app/store/store';
 
 export interface Book {
-  id: string;
-  title: string;
-  author: string;
-  category: string;
-  condition: string;
-  description: string;
-  imageUrl: string;
-  isBundle: boolean;
-  price: number;
-  sellerId: string;
-  createdAt: string; 
-  updatedAt: string;  
+    id: string;
+    title: string;
+    author: string;
+    category: string;
+    condition: string;
+    description: string;
+    imageUrl: string;
+    isBundle: boolean;
+    price: number;
+    sellerId: string;
+    createdAt: string;
+    updatedAt: string;
 
 }
 interface SellerListingProps {
@@ -45,9 +45,9 @@ const SellerListing = () => {
             const data = response.data;
             setBooks(data);
             if (data.success) {
-               
+
             }
-             setLoading(false);
+            setLoading(false);
             console.log(data);
             return data;
         } catch (error) {
@@ -62,16 +62,20 @@ const SellerListing = () => {
 
 
     const renderItem = ({ item }: { item: Book }) => (
-
-        <TouchableOpacity onPress={() => console.log(item.title)}>
-            <View style={styles.indiviDual}>
-                <Image
-                    source={{ uri: item.imageUrl }}
-                    style={styles.bookImage}
-                />
-                <Text style={styles.bookTitle}>{item.title}</Text>
-            </View>
-        </TouchableOpacity>
+        <Link
+            asChild
+            href={{ pathname: "/(zseller)/[id]", params: { id: item.id } }}
+        >
+            <TouchableOpacity onPress={() => console.log(item.title)}>
+                <View style={styles.indiviDual}>
+                    <Image
+                        source={{ uri: item.imageUrl }}
+                        style={styles.bookImage}
+                    />
+                    <Text style={styles.bookTitle}>{item.title}</Text>
+                </View>
+            </TouchableOpacity>
+        </Link>
     );
 
     React.useEffect(() => {
@@ -81,6 +85,14 @@ const SellerListing = () => {
     if (loading) {
         return (
             <SafeAreaView>
+                <Pressable className='flex flex-row max-w-40 text-center p-2 text-white items-center gap-2 bg-blue-400 py-2 px-4 rounded-lg'
+                    onPress={() => router.push("/(zseller)/newproduct")}
+
+
+                >
+                    <Feather name="plus" size={24} color="black" />
+                    <Text>New Listing</Text>
+                </Pressable>
                 <Text>Loading...</Text>
             </SafeAreaView>
         )
@@ -98,13 +110,13 @@ const SellerListing = () => {
                     <Text>New Listing</Text>
                 </Pressable>
             </View>
-             <FlatList
+            <FlatList
                 data={books}
                 renderItem={renderItem}
-                keyExtractor={(item, index) => index.toString()}
+                keyExtractor={(item) => item.id}
                 contentContainerStyle={styles.container}
-                numColumns={2} 
-            /> 
+                numColumns={2}
+            />
         </SafeAreaView>
     )
 }

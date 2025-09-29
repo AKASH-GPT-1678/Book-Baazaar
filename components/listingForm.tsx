@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text, TextInput, View, Pressable, Switch, Alert } from 'react-native';
+import { ScrollView, StyleSheet, Text, TextInput, View, Pressable, Switch, Alert, Platform } from 'react-native';
 import React from 'react';
 import { router } from 'expo-router';
 import axios from 'axios';
@@ -6,10 +6,9 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/app/store/store';
 import { Picker } from '@react-native-picker/picker';
 import * as ImagePicker from 'expo-image-picker';
+import { ENV } from '@/data/ENV';
 const ListingForm = () => {
     const [bundle, setBundle] = React.useState(false);
-
-
     const [title, setTitle] = React.useState("");
     const [author, setAuthor] = React.useState("");
     const [price, setPrice] = React.useState("");
@@ -17,6 +16,7 @@ const ListingForm = () => {
     const [contact, setContact] = React.useState("");
     const [category, setCategory] = React.useState("");
     const [file, setImage] = React.useState<any>(null);
+    const [error, setError] = React.useState("");
     const [condition, setSelectedCondition] = React.useState("Good");
     const token = useSelector((state: RootState) => state.user.token);
     const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
@@ -37,58 +37,66 @@ const ListingForm = () => {
 
 
 
-  const handleSubmit = async () => {
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("author", author);
-    formData.append("condition", condition);
-    formData.append("price", price);
-    formData.append("description", description);
-    formData.append("contact", contact);
-    formData.append("bundle", bundle.toString());
-    formData.append("category", category);
+ const handleSubmit = async () => {
+  const formData = new FormData();
+  formData.append("title", title);
+  formData.append("author", author);
+  formData.append("condition", condition);
+  formData.append("price", price);
+  formData.append("description", description);
+  formData.append("contact", contact);
+  formData.append("bundle", bundle.toString());
+  formData.append("category", category);
 
-    if (file) {
-        console.log("there is file");
-        console.log("File object:", file);
-        
-        // For React Native Web, use the actual File object
-        if (file.file) {
-            // Use the native File object from the picker result
-            formData.append("image", file.file, file.fileName);
-        } else {
-            // Fallback for mobile - shouldn't reach here in web environment
-            formData.append("image", {
-                uri: file.uri,
-                type: file.mimeType || "image/png",
-                name: file.fileName || "image.png",
-            } as any);
-        }
+  if (file) {
+    console.log("File object:", file);
+    console.log("Platform:", Platform.OS);
+
+    if (Platform.OS === "web" && file.file) {
+
+      formData.append("image", file.file, file.fileName);
+    } else {
+    
+      const fileToUpload = {
+        uri: file.uri,
+        type: file.mimeType || file.type || "image/jpeg",
+        name: file.fileName || file.name || "image.jpg",
+      };
+
+
+      formData.append("image", fileToUpload as any);
     }
+  }
 
+  try {
+    const response = await axios.post(
+      `${ENV.BASE_URL}/api/seller/list`,
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+        timeout: 30000,
+      }
+    );
 
+    console.log("✅ Success response:", response.data);
+    Alert.alert("Success", "Listing created successfully!");
+    router.back();
+  } catch (error: any) {
+    console.error("❌ Full error object:", error);
+    console.error("❌ Error response:", error.response?.data);
+    console.error("❌ Error status:", error.response?.status);
 
+    const errorMessage =
+      error.response?.data?.message ||
+      error.message ||
+      "Something went wrong while creating the listing.";
 
-    try {
-        const response = await axios.post(
-            `${BASE_URL}/api/seller/listing`,
-            formData,
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-           
-                },
-                timeout: 30000,
-            }
-        );
-        console.log(response.data);
-
-        Alert.alert("Success", "Listing created successfully!");
-        router.back();
-    } catch (error: any) {
-        console.error("Error uploading listing:", error.response?.data || error.message);
-        Alert.alert("Error", "Failed to create listing.");
-    }
+    setError(errorMessage);
+    Alert.alert("Error", errorMessage);
+  }
 };
 
     return (
@@ -143,6 +151,9 @@ const ListingForm = () => {
                         value={description}
                         onChangeText={setDescription}
                     />
+                    <Text>
+                        {error && <Text className="text-red-500">{error}</Text>}
+                    </Text>
 
                     <Text className="text-lg font-bold pb-2">Contact (Phone/Email)</Text>
                     <TextInput

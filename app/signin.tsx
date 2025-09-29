@@ -88,7 +88,7 @@ const SignInn = () => {
                 <View style={styles.view1}>
                     <Text style={styles.loginTitle}>Login to your Account</Text>
 
-                    {/* Email */}
+                 
                     <View style={styles.inputContainer}>
                         <Text style={styles.label}>Email</Text>
                         <TextInput
@@ -103,7 +103,7 @@ const SignInn = () => {
                         />
                     </View>
 
-                    {/* Password */}
+               
                     <View style={styles.inputContainer}>
                         <Text style={styles.label}>Password</Text>
                         <TextInput
