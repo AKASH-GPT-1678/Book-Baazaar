@@ -12,12 +12,13 @@ export default async function LoadListings(category: string): Promise<Book[]> {
     }
 
 
-    const response = await axios.get(`${ENV.BASE_URL}/api/product/${category}`);
+    const response = await axios.get(`${ENV.BASE_URL}/api/product/listings/${category}`);
 
 
     if (!Array.isArray(response.data)) {
       throw new Error("Unexpected API response format.");
-    }
+    };
+    console.log(response.data);
 
     return response.data as Book[];
 

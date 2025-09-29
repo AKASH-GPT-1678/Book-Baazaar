@@ -29,88 +29,7 @@ export type Item = {
   specialTag: string;
 };
 
-export const booksData2: Item[] = [
-  {
-    id: 1,
-    name: "1984 by George Orwell",
-    image: "https://res.cloudinary.com/dffepahvl/image/upload/v1757712982/lwzug8nbrdvephl8afvp.jpg",
-    quantity: "1 copy available",
-    rating: 4.8,
-    deliveryTime: "2-3 days",
-    price: 199,
-    specialTag: "Bestseller"
-  },
-  {
-    id: 2,
-    name: "Sapiens by Yuval Noah Harari",
-    image: "https://res.cloudinary.com/dffepahvl/image/upload/v1757713031/p9grxnrc6qkvi45is0ir.jpg",
-    quantity: "2 copies available",
-    rating: 4.9,
-    deliveryTime: "3-4 days",
-    price: 249,
-    specialTag: "Reader's Choice"
-  },
-  {
-    id: 3,
-    name: "A Brief History of Time by Stephen Hawking",
-    image: "https://res.cloudinary.com/dffepahvl/image/upload/v1757713061/lvkgw7rpztub2nyszwoa.jpg",
-    quantity: "3 copies available",
-    rating: 4.7,
-    deliveryTime: "2-5 days",
-    price: 179,
-    specialTag: "Science Classic"
-  },
-  {
-    id: 4,
-    name: "Clean Code by Robert C. Martin",
-    image: "https://res.cloudinary.com/dffepahvl/image/upload/v1757713117/j4esxe1mo0iarmhmiamp.jpg",
-    quantity: "1 copy available",
-    rating: 4.6,
-    deliveryTime: "2-3 days",
-    price: 299,
-    specialTag: "Tech Must-Read"
-  },
-  {
-    id: 5,
-    name: "The Lean Startup by Eric Ries",
-    image: "https://res.cloudinary.com/dffepahvl/image/upload/v1757713152/wjqtytdugiqdnz6uddet.jpg",
-    quantity: "2 copies available",
-    rating: 4.5,
-    deliveryTime: "3-4 days",
-    price: 199,
-    specialTag: "Business Guide"
-  },
-  {
-    id: 6,
-    name: "Atomic Habits by James Clear",
-    image: "https://res.cloudinary.com/dffepahvl/image/upload/v1757713184/wwxt0crlrrwyhqv4klf0.jpg",
-    quantity: "5 copies available",
-    rating: 4.9,
-    deliveryTime: "2-3 days",
-    price: 149,
-    specialTag: "Self-Help Star"
-  },
-  {
-    id: 7,
-    name: "Guns, Germs, and Steel by Jared Diamond",
-    image: "https://res.cloudinary.com/dffepahvl/image/upload/v1757713218/cybdldzksdu9fmbotrtw.jpg",
-    quantity: "1 copy available",
-    rating: 4.4,
-    deliveryTime: "4-6 days",
-    price: 179,
-    specialTag: "History Gem"
-  },
-  {
-    id: 8,
-    name: "The Lord of the Rings by J.R.R. Tolkien",
-    image: "https://res.cloudinary.com/dffepahvl/image/upload/v1757713288/u4ofrezcnc7gds70nntw.jpg",
-    quantity: "2 copies available",
-    rating: 5.0,
-    deliveryTime: "2-3 days",
-    price: 299,
-    specialTag: "Epic Fantasy"
-  }
-];
+
 
 const IndexPage = () => {
   const [activeCategory, setActiveCategory] = React.useState("Fiction");
@@ -122,7 +41,7 @@ const IndexPage = () => {
     <View style={styles.container}>
 
       <View >
-       <Pressable className='bg-blue-500  rounded-2xl max-w-[120px] ml-auto mb-3 px-8 p-4'
+        <Pressable className='bg-blue-500  rounded-2xl max-w-[120px] ml-auto mb-3 px-8 p-4'
 
           onPress={() => router.push({
             pathname: "/signin",
@@ -166,13 +85,9 @@ const IndexPage = () => {
       <ScrollView className=''>
 
 
-{/* 
-        <ReuseBooksView slice1={0} slice2={6} heading1="Best Sellers" heading2="Best Sellers" data={booksData2} /> */}
-        {/* <ReuseBooksView slice1={0} slice2={6} heading1="Best Sellers" heading2="Best Sellers" data={booksData2} />
-        <ReuseBooksView slice1={0} slice2={6} heading1="Best Sellers" heading2="Best Sellers" data={booksData2} />
-        <ReuseBooksView slice1={0} slice2={6} heading1="Best Sellers" heading2="Best Sellers" data={booksData2} />
-        <ReuseBooksView slice1={0} slice2={6} heading1="Best Sellers" heading2="Best Sellers" data={booksData2} />
-        <ReuseBooksView slice1={0} slice2={6} heading1="Best Sellers" heading2="Best Sellers" data={booksData2} /> */}
+        
+        <ReuseBooksView  heading1="Best Sellers" heading2="Best Sellers"  category='Biopic' autoFetch={true} /> 
+   
         <Footer />
       </ScrollView>
 

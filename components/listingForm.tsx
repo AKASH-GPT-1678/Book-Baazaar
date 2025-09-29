@@ -35,69 +35,86 @@ const ListingForm = () => {
         }
     };
 
+    const categories = [
+        "fiction",
+        "nonfiction",
+        "science",
+        "technology",
+        "business",
+        "selfhelp",
+        "history",
+        "others"
+    ]
 
 
- const handleSubmit = async () => {
-  const formData = new FormData();
-  formData.append("title", title);
-  formData.append("author", author);
-  formData.append("condition", condition);
-  formData.append("price", price);
-  formData.append("description", description);
-  formData.append("contact", contact);
-  formData.append("bundle", bundle.toString());
-  formData.append("category", category);
-
-  if (file) {
-    console.log("File object:", file);
-    console.log("Platform:", Platform.OS);
-
-    if (Platform.OS === "web" && file.file) {
-
-      formData.append("image", file.file, file.fileName);
-    } else {
-    
-      const fileToUpload = {
-        uri: file.uri,
-        type: file.mimeType || file.type || "image/jpeg",
-        name: file.fileName || file.name || "image.jpg",
-      };
 
 
-      formData.append("image", fileToUpload as any);
-    }
-  }
 
-  try {
-    const response = await axios.post(
-      `${ENV.BASE_URL}/api/seller/list`,
-      formData,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-        },
-        timeout: 30000,
-      }
-    );
+    const handleSubmit = async () => {
 
-    console.log("✅ Success response:", response.data);
-    Alert.alert("Success", "Listing created successfully!");
-    router.back();
-  } catch (error: any) {
-    console.error("❌ Full error object:", error);
-    console.error("❌ Error response:", error.response?.data);
-    console.error("❌ Error status:", error.response?.status);
+        if (categories.includes(category.toLowerCase())) {
 
-    const errorMessage =
-      error.response?.data?.message ||
-      error.message ||
-      "Something went wrong while creating the listing.";
+        }
+        const formData = new FormData();
+        formData.append("title", title);
+        formData.append("author", author);
+        formData.append("condition", condition);
+        formData.append("price", price);
+        formData.append("description", description);
+        formData.append("contact", contact);
+        formData.append("bundle", bundle.toString());
+        formData.append("category", category);
 
-    setError(errorMessage);
-    Alert.alert("Error", errorMessage);
-  }
-};
+        if (file) {
+            console.log("File object:", file);
+            console.log("Platform:", Platform.OS);
+
+            if (Platform.OS === "web" && file.file) {
+
+                formData.append("image", file.file, file.fileName);
+            } else {
+
+                const fileToUpload = {
+                    uri: file.uri,
+                    type: file.mimeType || file.type || "image/jpeg",
+                    name: file.fileName || file.name || "image.jpg",
+                };
+
+
+                formData.append("image", fileToUpload as any);
+            }
+        }
+
+        try {
+            const response = await axios.post(
+                `${ENV.BASE_URL}/api/seller/list`,
+                formData,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        "Content-Type": "multipart/form-data",
+                    },
+                    timeout: 30000,
+                }
+            );
+
+            console.log("✅ Success response:", response.data);
+            Alert.alert("Success", "Listing created successfully!");
+            router.back();
+        } catch (error: any) {
+            console.error("❌ Full error object:", error);
+            console.error("❌ Error response:", error.response?.data);
+            console.error("❌ Error status:", error.response?.status);
+
+            const errorMessage =
+                error.response?.data?.message ||
+                error.message ||
+                "Something went wrong while creating the listing.";
+
+            setError(errorMessage);
+            Alert.alert("Error", errorMessage);
+        }
+    };
 
     return (
         <ScrollView>
@@ -174,12 +191,19 @@ const ListingForm = () => {
                     </View>
 
                     <Text className="text-lg font-bold pb-2">Category</Text>
-                    <TextInput
-                        className="border-2 p-3 rounded-lg mb-6"
-                        placeholder="Fiction / Non-Fiction / Textbook"
-                        value={category}
-                        onChangeText={setCategory}
-                    />
+                    <Picker
+                        selectedValue={category}
+                        onValueChange={(itemValue) => setCategory(itemValue)}
+                        className="px-6 border-zinc-100"
+                    >
+                        {categories.map((cat) => (
+                            <Picker.Item
+                                key={cat}
+                                label={cat.charAt(0).toUpperCase() + cat.slice(1)} 
+                                value={cat}
+                            />
+                        ))}
+                    </Picker>
 
 
                     <Pressable onPress={() => handleSubmit()}>

@@ -40,7 +40,7 @@ const useFetch = <T>(fetchFunction: () => Promise<Book[]>, autoFetch: boolean = 
         data,
         loading,
         error,
-        refresh: fetchData(),
+        refresh: fetchData,
         reset: refresh,
     }
 
