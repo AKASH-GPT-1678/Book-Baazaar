@@ -6,6 +6,7 @@ import ReuseBooksView from './booksdisplay';
 import { router } from "expo-router";
 import { useSelector } from 'react-redux';
 import { RootState } from '@/app/store/store';
+import useFetch from '@/data/usefetch';
 const booksData = [
   { id: 1, category: "Fiction", book: "1984 by George Orwell", image: "https://res.cloudinary.com/dffepahvl/image/upload/v1757712982/lwzug8nbrdvephl8afvp.jpg" },
   { id: 2, category: "NonFiction", book: "Sapiens by Yuval Noah Harari", image: "https://res.cloudinary.com/dffepahvl/image/upload/v1757713031/p9grxnrc6qkvi45is0ir.jpg" },
@@ -165,13 +166,13 @@ const IndexPage = () => {
       <ScrollView className=''>
 
 
-
+{/* 
+        <ReuseBooksView slice1={0} slice2={6} heading1="Best Sellers" heading2="Best Sellers" data={booksData2} /> */}
+        {/* <ReuseBooksView slice1={0} slice2={6} heading1="Best Sellers" heading2="Best Sellers" data={booksData2} />
         <ReuseBooksView slice1={0} slice2={6} heading1="Best Sellers" heading2="Best Sellers" data={booksData2} />
         <ReuseBooksView slice1={0} slice2={6} heading1="Best Sellers" heading2="Best Sellers" data={booksData2} />
         <ReuseBooksView slice1={0} slice2={6} heading1="Best Sellers" heading2="Best Sellers" data={booksData2} />
-        <ReuseBooksView slice1={0} slice2={6} heading1="Best Sellers" heading2="Best Sellers" data={booksData2} />
-        <ReuseBooksView slice1={0} slice2={6} heading1="Best Sellers" heading2="Best Sellers" data={booksData2} />
-        <ReuseBooksView slice1={0} slice2={6} heading1="Best Sellers" heading2="Best Sellers" data={booksData2} />
+        <ReuseBooksView slice1={0} slice2={6} heading1="Best Sellers" heading2="Best Sellers" data={booksData2} /> */}
         <Footer />
       </ScrollView>
 

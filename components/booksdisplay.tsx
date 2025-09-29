@@ -1,7 +1,10 @@
 import React from "react";
 import { View, Text, Image, Pressable, FlatList } from "react-native";
 import Ratings from "./ratings";
+import useFetch from "@/data/usefetch";
+
 import { router } from "expo-router";
+import LoadListings from "@/data/listing";
 export type Item = {
   id: number;
   name: string;
@@ -19,6 +22,7 @@ interface Props {
   heading1: string;
   heading2?: string;
   bgUrl?: string;
+  category: string;
   data: Item[];
 };
 
@@ -28,9 +32,17 @@ const ReuseBooksView: React.FC<Props> = ({
   slice2,
   heading1,
   heading2,
+  category,
   bgUrl,
 }) => {
   const product = products.slice(slice1, slice2);
+
+  const { loading, data, error } = useFetch(() => LoadListings(category), false);
+
+
+
+
+
 
   return (
     <View className="mt-5">
