@@ -36,8 +36,7 @@ const SignInn = () => {
     };
 
     const handleManualSignIn = async () => {
-        console.log("working")
-        Alert.alert("I am working");
+     
         console.log(email , password)
         if (!BASE_URL) return { success: false, message: "BASE_URL is not defined" };
         if (!email || !password)

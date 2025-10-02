@@ -10,6 +10,7 @@ import ProductHighlights from '@/components/higlights';
 import DeliveryDetailsComponent from '@/components/deliveryDetails';
 import RatingsAndReviewsComponent from '@/components/reviews';
 import ProductNotFound from '@/components/productNotfound';
+import { Ionicons } from '@expo/vector-icons';
 
 const ProductView = () => {
     const searchParams = useSearchParams();
@@ -24,7 +25,13 @@ const ProductView = () => {
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <ScrollView>
-                <View style={{ flex: 1 }}>
+                <View style={{ flex: 1 }} className='relative'>
+                <Ionicons name="arrow-back" size={26} color="black" className='absolute left-4'
+                    onPress={() => router.back()}
+
+
+
+                />
 
                     <View className='px-20 bg-blue-100 py-4 '>
                         <Text className='text-center leading-10'></Text>
