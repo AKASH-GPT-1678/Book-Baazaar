@@ -11,27 +11,52 @@ import DeliveryDetailsComponent from '@/components/deliveryDetails';
 import RatingsAndReviewsComponent from '@/components/reviews';
 import ProductNotFound from '@/components/productNotfound';
 import { Ionicons } from '@expo/vector-icons';
-
+import useFetch from '@/data/usefetch';
+import axios from 'axios';
+import { ENV } from '@/data/ENV';
+import LoadingScreen from '@/components/loadingScreen';
 const ProductView = () => {
     const searchParams = useSearchParams();
     const productId = searchParams.get('productId');
     const [active, setActive] = React.useState(0);
     const dataPoints = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-    if (!productId) return <View className='flex items-center justify-center h-screen'>
+    const loadProductById = async () => {
+        try {
+            const response = await axios.get(`${ENV.BASE_URL}/api/product/${productId}`)
+            console.log(response.data);
+            return response.data;
+        } catch (error) {
+            console.log(error);
+
+
+        }
+
+    }
+    const { loading, error, data } = useFetch(loadProductById, true);
+
+
+
+    if (!productId || error) return <View className='flex items-center justify-center h-screen'>
         <ProductNotFound />
     </View>
+
+    if(loading){
+        return <LoadingScreen/>
+    }
+
+  if(data)
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <ScrollView>
                 <View style={{ flex: 1 }} className='relative'>
-                <Ionicons name="arrow-back" size={26} color="black" className='absolute left-4'
-                    onPress={() => router.back()}
+                    <Ionicons name="arrow-back" size={26} color="black" className='absolute left-4'
+                        onPress={() => router.back()}
 
 
 
-                />
+                    />
 
                     <View className='px-20 bg-blue-100 py-4 '>
                         <Text className='text-center leading-10'></Text>
@@ -42,7 +67,7 @@ const ProductView = () => {
                             <Entypo name="heart-outlined" size={24} color="black" className='bg-white p-2 rounded-lg opacity-70 ' />
                             <Feather name="send" size={24} color="black" className='bg-white p-2 mt-2 rounded-lg opacity-70' />
                         </View>
-                        <Image source={require("../../assets/images/watch.png")} height={100} width={400} className='h-[350px] w-screen object-contain' />
+                        <Image source={{uri : data.imageUrl}} height={100} width={400} className='h-[350px] w-screen object-contain' />
                     </View>
                     <View className='flex flex-row mx-auto mt-4'>
 
@@ -63,7 +88,7 @@ const ProductView = () => {
                             renderItem={({ item }) => (
                                 <View style={styles.itemContainer}>
                                     <Image
-                                        source={require("../../assets/images/watch.png")}
+                                        source={{uri : data.imageUrl}}
                                         style={styles.image}
                                         resizeMode="cover"
                                     />
@@ -80,10 +105,7 @@ const ProductView = () => {
                                 </Link>
                             </View>
                             <Text>
-                                Noise earphones deliver crystal-clear sound with deep bass for an immersive listening experience.
-                                They are designed for comfort, making them perfect
-                                for long music sessions.
-
+                               {data.description}
                             </Text>
                             <View className='flex flex-row gap-2 items-center'>
                                 <Text className='text-green-700 text-xl'>↓61%</Text>
@@ -114,7 +136,7 @@ const ProductView = () => {
                 <Pressable style={styles.bottomButton} className='bg-yellow-400 rounded-xl'
                     onPress={() => router.replace({
                         pathname: "/(zproduct)/purchase",
-                        params: { productId: 1234 }
+                        params: { productId: data.id, image: data.imageUrl , prce : data.price , titile : data.title  }
                     })}
 
 
@@ -122,7 +144,7 @@ const ProductView = () => {
 
                 >
                     <Text className='text-center font-semibold'>Buy Now</Text>
-                    <Text className='text-center font-semibold'>at 999</Text>
+                    <Text className='text-center font-semibold'>at {data.price}</Text>
                 </Pressable>
             </View>
         </SafeAreaView>

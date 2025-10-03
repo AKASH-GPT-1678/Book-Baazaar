@@ -1,9 +1,9 @@
 import { Book } from "@/components/sellerlisting";
 import React, { use } from "react";
 
-const useFetch = <T>(fetchFunction: () => Promise<Book[]>, autoFetch: boolean = true) => {
+const useFetch = <T>(fetchFunction: () => Promise<any>, autoFetch: boolean = true) => {
 
-    const [data, setData] = React.useState<Book[] | null>(null);
+    const [data, setData] = React.useState<any | null>(null);
     const [loading, setLoading] = React.useState(false);
     const [error, setError] = React.useState(null);
 

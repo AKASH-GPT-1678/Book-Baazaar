@@ -18,3 +18,43 @@ export const ListingData =  [
     { book: "Guns, Germs, and Steel", image: "https://res.cloudinary.com/dffepahvl/image/upload/v1757713218/cybdldzksdu9fmbotrtw.jpg" },
     { book: "The Lord of the Rings", image: "https://res.cloudinary.com/dffepahvl/image/upload/v1757713288/u4ofrezcnc7gds70nntw.jpg" },
   ];
+  export const bookCategories = [
+    {
+      title: "Academic School",
+      imageUrl: "https://bookly-app.s3.eu-north-1.amazonaws.com/bundles/academic.jpg"
+    },
+    {
+      title: "Engineering Entrance",
+      imageUrl: "https://bookly-app.s3.eu-north-1.amazonaws.com/bundles/jee.jpg"
+    },
+    {
+      title: "Medical Entrance",
+      imageUrl: "https://bookly-app.s3.eu-north-1.amazonaws.com/bundles/jee.jpg"
+    },
+    {
+      title: "Management & Commerce",
+      imageUrl: "https://bookly-app.s3.eu-north-1.amazonaws.com/bundles/jee.jpg"
+    },
+    {
+      title: "Government Jobs",
+      imageUrl: "https://bookly-app.s3.eu-north-1.amazonaws.com/bundles/jee.jpg"
+    },
+    {
+      title: "Law Entrance",
+      imageUrl: "https://bookly-app.s3.eu-north-1.amazonaws.com/bundles/jee.jpg"
+    },
+    {
+      title: "Foreign Studies",
+      imageUrl: "https://bookly-app.s3.eu-north-1.amazonaws.com/bundles/jee.jpg"
+    },
+    {
+      title: "Professional & Technical",
+      imageUrl: "https://bookly-app.s3.eu-north-1.amazonaws.com/bundles/jee.jpg"
+    },
+    {
+      title: "Test Series & Guides",
+      imageUrl: "https://bookly-app.s3.eu-north-1.amazonaws.com/bundles/jee.jpg"
+    }
+  ];
+  
+  

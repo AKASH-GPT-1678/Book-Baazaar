@@ -20,6 +20,8 @@ export default function TabLayout() {
       screenOptions={{
 
         headerShown: false,
+        
+    
 
       }}>
       <Tabs.Screen
@@ -38,9 +40,12 @@ export default function TabLayout() {
       />
       <Tabs.Screen
         name="orders"
+        
         options={{
+          
           title: 'Orders',
           tabBarIcon: ({ color }) => <AntDesign size={28} name='shopping-cart' color={color} />,
+          
         }}
       />
 
