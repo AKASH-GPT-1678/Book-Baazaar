@@ -85,13 +85,9 @@ const IndexPage = () => {
       <ScrollView className=''>
 
 
-        
-        <ReuseBooksView  heading1="Best Sellers" heading2="Best Sellers"  category='Biopic' autoFetch={true} /> 
-        <ReuseBooksView  heading1="Business" heading2="Business Classic"  category='Textbook' autoFetch={true} /> 
-        {/* <ReuseBooksView  heading1="New Arrivals" heading2="New Arrival"  category='others' autoFetch={true} /> 
-        <ReuseBooksView  heading1="Literature / Novels" heading2="New Arrival"  category='others' autoFetch={true} /> 
-        <ReuseBooksView  heading1="Self-Help" heading2="New Arrival"  category='Textbook' autoFetch={true} /> 
-        <ReuseBooksView  heading1="Children" heading2="Exciting Books for Children"  category='Textbook' autoFetch={true} />  */}
+
+        <ReuseBooksView heading1="Best Sellers" heading2="Best Sellers" category='Technology' autoFetch={true} />
+
         <Footer />
       </ScrollView>
 

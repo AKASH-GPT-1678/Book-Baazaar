@@ -18,7 +18,7 @@ export default async function LoadListings(category: string): Promise<Book[]> {
     if (!Array.isArray(response.data)) {
       throw new Error("Unexpected API response format.");
     };
-    console.log(response.data);
+
 
     return response.data as Book[];
 
