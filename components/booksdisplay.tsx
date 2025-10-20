@@ -7,6 +7,8 @@ import { router } from "expo-router";
 import LoadListings from "@/data/listing";
 import ProductNotFound from "./productNotfound";
 import LoadingScreen from "./loadingScreen";
+import axios from "axios";
+import { ENV } from "@/data/ENV";
 
 interface Props {
 
@@ -29,7 +31,18 @@ const ReuseBooksView: React.FC<Props> = ({
 
 }) => {
 
+  const addView = async (bookId: string) => {
+    try {
 
+      const response = await axios.put(`${ENV.BASE_URL}/api/product/view/${bookId}`);
+
+    } catch (error) {
+      console.log(error);
+
+
+    }
+
+  }
   const { loading, data, error } = useFetch(() => LoadListings(category), autoFetch);
 
 
@@ -54,10 +67,22 @@ const ReuseBooksView: React.FC<Props> = ({
           keyExtractor={(item) => item.id.toString()}
           scrollEnabled={false}
           renderItem={({ item }) => (
-            <Pressable onPress={() => router.push({
-              pathname: "/(zproduct)",
-              params: { productId: item.id.toString() }
-            })}>
+            <Pressable onPress={
+
+
+
+
+
+              () => {
+                addView(item.id.toString());
+             
+                router.push({
+                  pathname: "/(zproduct)/[id]",
+                  params: { id: item.id.toString() },
+                });
+              }
+
+            }>
               <View className="w-[140px] p-1 mb-5"  >
                 <View className="bg-white rounded-xl shadow-sm p-2 relative h-[220px]">
                   <Image

@@ -12,12 +12,12 @@ export default function ProductLayout() {
 
         <Stack>
             <Text>Hii</Text>
-       
-                <Stack.Screen name='index' options={{ headerShown: false }} />
-                <Stack.Screen name='purchase' options={{headerShown : false, contentStyle : {backgroundColor : "#DCE3E2"}}} />
-                <Stack.Screen name='payment' options={{headerShown : false, contentStyle : {backgroundColor : "#DCE3E2"}}} />
 
-       
+            <Stack.Screen name='[id]' options={{ headerShown: false }} />
+            <Stack.Screen name='purchase' options={{ headerShown: false, contentStyle: { backgroundColor: "#DCE3E2" } }} />
+            <Stack.Screen name='payment' options={{ headerShown: false, contentStyle: { backgroundColor: "#DCE3E2" } }} />
+
+
 
         </Stack>
 
