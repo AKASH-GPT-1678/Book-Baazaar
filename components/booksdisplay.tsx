@@ -16,7 +16,8 @@ interface Props {
   heading2?: string;
   bgUrl?: string;
   category: string;
-  autoFetch: boolean
+  autoFetch: boolean;
+  seeAll: boolean
 
 };
 
@@ -27,7 +28,8 @@ const ReuseBooksView: React.FC<Props> = ({
   heading2,
   category,
   bgUrl,
-  autoFetch
+  autoFetch,
+  seeAll
 
 }) => {
 
@@ -62,10 +64,11 @@ const ReuseBooksView: React.FC<Props> = ({
 
 
         <FlatList
-          data={data.slice(0, 6)}
+          data={seeAll ? data : data.slice(0, 6)}
           numColumns={3}
           keyExtractor={(item) => item.id.toString()}
           scrollEnabled={false}
+
           renderItem={({ item }) => (
             <Pressable onPress={
 
@@ -75,7 +78,7 @@ const ReuseBooksView: React.FC<Props> = ({
 
               () => {
                 addView(item.id.toString());
-             
+
                 router.push({
                   pathname: "/(zproduct)/[id]",
                   params: { id: item.id.toString() },
@@ -83,7 +86,7 @@ const ReuseBooksView: React.FC<Props> = ({
               }
 
             }>
-              <View className="w-[140px] p-1 mb-5"  >
+              <View className=" w-[130px] p-1 mb-5"  >
                 <View className="bg-white rounded-xl shadow-sm p-2 relative h-[220px]">
                   <Image
                     source={{ uri: item.imageUrl }}
@@ -123,11 +126,24 @@ const ReuseBooksView: React.FC<Props> = ({
             </Pressable>
           )}
           ListFooterComponent={() => (
-            <View className="py-4">
-              <Text className="text-center text-blue-900 font-semibold">
-                See all products ▶
-              </Text>
-            </View>
+            <Pressable
+
+            onPress={
+              ()=>
+              router.push({
+                pathname : "/[category]",
+                params : {category : category.toString()}
+              })
+            }
+            
+            
+            >
+              <View className="py-4 flex flex-row justify-center items-center text-center">
+                <Text className=" text-blue-900 font-semibold">
+                  See all products ▶
+                </Text>
+              </View>
+            </Pressable>
           )}
         />
       </View>
