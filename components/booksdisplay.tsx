@@ -70,22 +70,13 @@ const ReuseBooksView: React.FC<Props> = ({
           scrollEnabled={false}
 
           renderItem={({ item }) => (
-            <Pressable onPress={
-
-
-
-
-
-              () => {
-                addView(item.id.toString());
-
-                router.push({
-                  pathname: "/(zproduct)/[id]",
-                  params: { id: item.id.toString() },
-                });
-              }
-
-            }>
+            <Pressable onPress={() => {
+              addView(item.id.toString());
+              router.push({
+                pathname: '/(zproduct)/[id]', // or whatever your actual route file is named
+                params: { id: item.id.toString() },
+              });
+            }}>
               <View className=" w-[130px] p-1 mb-5"  >
                 <View className="bg-white rounded-xl shadow-sm p-2 relative h-[220px]">
                   <Image
@@ -128,15 +119,15 @@ const ReuseBooksView: React.FC<Props> = ({
           ListFooterComponent={() => (
             <Pressable
 
-            onPress={
-              ()=>
-              router.push({
-                pathname : "/[category]",
-                params : {category : category.toString()}
-              })
-            }
-            
-            
+              onPress={
+                () =>
+                  router.push({
+                    pathname: "/category",
+                    params: { id: category.toString() }
+                  })
+              }
+
+
             >
               <View className="py-4 flex flex-row justify-center items-center text-center">
                 <Text className=" text-blue-900 font-semibold">

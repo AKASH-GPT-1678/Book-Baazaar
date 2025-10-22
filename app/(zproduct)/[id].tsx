@@ -16,14 +16,16 @@ import RatingsAndReviewsComponent from '@/components/reviews';
 import ProductNotFound from '@/components/productNotfound';
 
 const ProductView = () => {
-   
-    const {id} = useLocalSearchParams();
+
+    const { id } = useLocalSearchParams(); // Changed this lin
     const [active, setActive] = React.useState(0);
     const dataPoints = Array.from({ length: 10 }, (_, i) => i + 1);
 
     const loadProductById = async () => {
         try {
-            const response = await axios.get(`${ENV.BASE_URL}/api/product/${id}`);
+            const response = await axios.get(`${ENV.BASE_URL}/api/seller/load?id=${id}`);
+            console.log(ENV.BASE_URL);
+            console.log(response.data);
             return response.data;
         } catch (error) {
             console.log(error);
@@ -31,138 +33,140 @@ const ProductView = () => {
         }
     };
 
-    const { loading, error, data } = useFetch(loadProductById, true);
 
-    if (!id || error) {
+
+    if (!id) {
         return (
             <View style={styles.centered}>
                 <ProductNotFound />
             </View>
         );
-    }
+    };
+    const { loading, error, data } = useFetch(loadProductById, true);
 
     if (loading) return <LoadingScreen />;
+    if (error) return <ProductNotFound />
 
- 
+
     const max = 50;
     const discount = Math.floor(Math.random() * max);
-   if (data)
-    return (
-        <SafeAreaView style={{ flex: 1 }}>
-            <ScrollView>
-                <View style={{ flex: 1 }}>
-                    {/* Back Button */}
-                    <Ionicons
-                        name="arrow-back"
-                        size={26}
-                        color="black"
-                        style={styles.backButton}
-                        onPress={() => router.back()}
-                    />
-
-                 
-                    <View style={styles.imageWrapper}>
-                        <View style={styles.iconWrapper}>
-                            <Entypo name="heart-outlined" size={24} color="black" style={styles.icon} />
-                            <Feather name="send" size={24} color="black" style={styles.icon} />
-                        </View>
-                        <Image
-                            source={{ uri: data.imageUrl }}
-                            style={styles.mainImage}
-                            resizeMode="contain"
+    if (data)
+        return (
+            <SafeAreaView style={{ flex: 1 }}>
+                <ScrollView>
+                    <View style={{ flex: 1 }}>
+                        {/* Back Button */}
+                        <Ionicons
+                            name="arrow-back"
+                            size={26}
+                            color="black"
+                            style={styles.backButton}
+                            onPress={() => router.back()}
                         />
-                    </View>
 
-                    
-                    <View style={styles.dotsWrapper}>
-                        {Array.from({ length: 6 }).map((_, index) => (
-                            <Text
-                                key={index}
-                                style={[
-                                    styles.dot,
-                                    active === index && { color: '#2563EB' },
-                                ]}
-                            >
-                                .
+
+                        <View style={styles.imageWrapper}>
+                            <View style={styles.iconWrapper}>
+                                <Entypo name="heart-outlined" size={24} color="black" style={styles.icon} />
+                                <Feather name="send" size={24} color="black" style={styles.icon} />
+                            </View>
+                            <Image
+                                source={{ uri: data.imageUrl }}
+                                style={styles.mainImage}
+                                resizeMode="contain"
+                            />
+                        </View>
+
+
+                        <View style={styles.dotsWrapper}>
+                            {Array.from({ length: 6 }).map((_, index) => (
+                                <Text
+                                    key={index}
+                                    style={[
+                                        styles.dot,
+                                        active === index && { color: '#2563EB' },
+                                    ]}
+                                >
+                                    .
+                                </Text>
+                            ))}
+                        </View>
+
+                  
+                        <View style={styles.detailsWrapper}>
+                            <Text style={styles.selectedColor}>
+                                Selected Color: <Text style={styles.colorValue}>Black</Text>
                             </Text>
-                        ))}
-                    </View>
 
-                    {/* Product Details */}
-                    <View style={styles.detailsWrapper}>
-                        <Text style={styles.selectedColor}>
-                            Selected Color: <Text style={styles.colorValue}>Black</Text>
-                        </Text>
+                     
+                            <FlatList
+                                data={dataPoints}
+                                horizontal
+                                showsHorizontalScrollIndicator={false}
+                                contentContainerStyle={styles.flatListContainer}
+                                keyExtractor={(item) => item.toString()}
+                                renderItem={({ item }) => (
+                                    <View style={styles.itemContainer}>
+                                        <Image
+                                            source={{ uri: data.imageUrl }}
+                                            style={styles.image}
+                                            resizeMode="cover"
+                                        />
+                                    </View>
+                                )}
+                            />
 
-                        {/* Horizontal FlatList */}
-                        <FlatList
-                            data={dataPoints}
-                            horizontal
-                            showsHorizontalScrollIndicator={false}
-                            contentContainerStyle={styles.flatListContainer}
-                            keyExtractor={(item) => item.toString()}
-                            renderItem={({ item }) => (
-                                <View style={styles.itemContainer}>
-                                    <Image
-                                        source={{ uri: data.imageUrl }}
-                                        style={styles.image}
-                                        resizeMode="cover"
-                                    />
+                            {/* Product Info */}
+                            <View style={styles.productInfo}>
+                                <View style={styles.storeRow}>
+                                    <Text style={styles.productName}>Noise</Text>
+                                    <Link href="https://theakashgupta.com/">
+                                        <Text style={styles.storeLink}>Visit Store</Text>
+                                    </Link>
                                 </View>
-                            )}
-                        />
+                                <Text style={styles.description}>{data.description}</Text>
 
-                        {/* Product Info */}
-                        <View style={styles.productInfo}>
-                            <View style={styles.storeRow}>
-                                <Text style={styles.productName}>Noise</Text>
-                                <Link href="https://theakashgupta.com/">
-                                    <Text style={styles.storeLink}>Visit Store</Text>
-                                </Link>
+                                {/* Price Section */}
+                                <View style={styles.priceRow}>
+                                    <Text style={styles.discount}>{discount}% OFF</Text>
+                                    <Text style={styles.originalPrice}>{data.price}</Text>
+                                    <Text style={styles.finalPrice}>{data.price}</Text>
+                                </View>
+
+                                {/* Extra Components */}
+                                <ProductHighlights />
+                                <DeliveryDetailsComponent />
+                                <RatingsAndReviewsComponent />
                             </View>
-                            <Text style={styles.description}>{data.description}</Text>
-
-                            {/* Price Section */}
-                            <View style={styles.priceRow}>
-                                <Text style={styles.discount}>{discount}% OFF</Text>
-                                <Text style={styles.originalPrice}>{data.price}</Text>
-                                <Text style={styles.finalPrice}>{data.price}</Text>
-                            </View>
-
-                            {/* Extra Components */}
-                            <ProductHighlights />
-                            <DeliveryDetailsComponent />
-                            <RatingsAndReviewsComponent />
                         </View>
                     </View>
-                </View>
-            </ScrollView>
+                </ScrollView>
 
-            {/* Bottom Buttons */}
-            <View style={styles.buttonView}>
-                <Pressable style={styles.bottomButton}>
-                    <Text style={styles.buttonText}>Add to Cart</Text>
-                </Pressable>
-                <Pressable
-                    style={[styles.bottomButton, styles.buyNowButton]}
-                    onPress={() =>
-                        router.replace({
-                            pathname: '/(zproduct)/purchase',
-                            params: {
-                                productId: data.id,
-                                image: data.imageUrl,
-                                price: data.price,
-                                title: data.title,
-                            },
-                        })
-                    }
-                >
-                    <Text style={styles.buttonText}>Buy Now</Text>
-                    <Text style={styles.buttonText}>at {data.price}</Text>
-                </Pressable>
-            </View>
-        </SafeAreaView>
-    );
+                {/* Bottom Buttons */}
+                <View style={styles.buttonView}>
+                    <Pressable style={styles.bottomButton}>
+                        <Text style={styles.buttonText}>Add to Cart</Text>
+                    </Pressable>
+                    <Pressable
+                        style={[styles.bottomButton, styles.buyNowButton]}
+                        onPress={() =>
+                            router.replace({
+                                pathname: '/(zproduct)/purchase',
+                                params: {
+                                    productId: data.id,
+                                    image: data.imageUrl,
+                                    price: data.price,
+                                    title: data.title,
+                                },
+                            })
+                        }
+                    >
+                        <Text style={styles.buttonText}>Buy Now</Text>
+                        <Text style={styles.buttonText}>at {data.price}</Text>
+                    </Pressable>
+                </View>
+            </SafeAreaView>
+        );
 };
 
 export default ProductView;

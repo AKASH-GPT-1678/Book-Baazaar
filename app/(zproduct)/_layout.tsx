@@ -11,10 +11,10 @@ export default function ProductLayout() {
     return (
 
         <Stack>
-            <Text>Hii</Text>
+        
 
             <Stack.Screen name='[id]' options={{ headerShown: false }} />
-            <Stack.Screen name='[category]' options={{ headerShown: false, contentStyle: { backgroundColor: "white" } }} />
+            <Stack.Screen name='category' options={{ headerShown: false, contentStyle: { backgroundColor: "white" } }} />
             <Stack.Screen name='purchase' options={{ headerShown: false, contentStyle: { backgroundColor: "#DCE3E2" } }} />
             <Stack.Screen name='payment' options={{ headerShown: false, contentStyle: { backgroundColor: "#DCE3E2" } }} />
 

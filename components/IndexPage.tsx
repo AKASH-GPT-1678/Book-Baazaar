@@ -86,7 +86,7 @@ const IndexPage = () => {
 
 
 
-        <ReuseBooksView heading1="Best Sellers" heading2="Best Sellers" category='Technology' autoFetch={true} />
+        <ReuseBooksView heading1="Best Sellers" heading2="Best Sellers" category='Technology' autoFetch={true} seeAll={false} />
 
         <Footer />
       </ScrollView>
