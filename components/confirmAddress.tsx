@@ -1,3 +1,4 @@
+import { router } from 'expo-router';
 import React from 'react'
 import { View, Text, Pressable } from 'react-native';
 
@@ -6,7 +7,10 @@ const ConfirmAddress = () => {
     <View className='px-4 mt-4 flex flex-col gap-4 p-4 '>
       <View className='flex flex-row justify-between items-center'>
         <Text className='text-lg font-bold'>Deliver to:</Text>
-        <Pressable className='p-3 border border-gray-700 px-8 rounded-lg'>
+        <Pressable className='p-3 border border-gray-700 px-8 rounded-lg'
+          onPress={() => router.push('/forms/adressform')}
+
+        >
           <Text className='text-blue-500 font-bold'>Change</Text>
         </Pressable>
       </View>
