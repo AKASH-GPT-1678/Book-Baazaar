@@ -22,9 +22,9 @@ export const profileAssets = [
         route: "/(zseller)"
     },
     {
-        title: "Orders",
+        title: "Address",
         icon: <Feather name="package" size={24} color="black" />,
-        route: "/(zseller)"
+        route: "/forms/addressform"
     },
     {
         title: "Messages",
@@ -34,7 +34,7 @@ export const profileAssets = [
     {
         title: "Payments & Earnings",
         icon: <AntDesign name="credit-card" size={24} color="black" />,
-        route: "/(zseller)"
+        route: "/forms/adressform"
     },
     {
         title: "Subscription / Premium",

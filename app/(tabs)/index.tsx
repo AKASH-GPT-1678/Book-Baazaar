@@ -4,7 +4,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSearchParams } from 'expo-router/build/hooks';
-import AddressForm from '../forms/adressform';
+import AddressForm from '../forms/addressform';
 const HomeScreen = () => {
   const [showIntro, setShowIntro] = React.useState(true);
   const searchParam = useSearchParams();

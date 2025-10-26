@@ -32,7 +32,7 @@ export const userSlice = createSlice({
 });
 
 
-export const { increment, login, logout  , setToken } = userSlice.actions;
+export const { increment, login, logout, setToken } = userSlice.actions;
 
 
 export default userSlice.reducer;

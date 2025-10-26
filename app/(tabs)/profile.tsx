@@ -1,4 +1,4 @@
-import { FlatList, ScrollView, StyleSheet, Text, Touchable, View, TouchableOpacity } from 'react-native';
+import { FlatList, ScrollView, StyleSheet, Text, Touchable, View, TouchableOpacity, Pressable } from 'react-native';
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -38,9 +38,10 @@ const Profile = () => {
               scrollEnabled={false}
               contentContainerStyle={{ gap: 10, marginTop: 10, paddingRight: 20, padding: 6 }}
               renderItem={({ item }) =>
-                <TouchableOpacity onPress={() => router.push("/(zseller)")}>
+                <TouchableOpacity onPress={() => router.push(item.route as any)}>
                   <ProfileNavigation leftIcon={item.icon} title={item.title} route={item.route} />
                 </TouchableOpacity>
+
 
 
 
@@ -48,7 +49,8 @@ const Profile = () => {
 
 
             />
- 
+
+
           </View>
 
         </View>

@@ -1,8 +1,51 @@
 import { router } from 'expo-router';
 import React from 'react'
 import { View, Text, Pressable } from 'react-native';
+import { ENV } from '@/data/ENV';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/app/store/store';
 
 const ConfirmAddress = () => {
+  const [address, setAddress] = React.useState("");
+  const [loading, setLoading] = React.useState(true);
+  const token = useSelector((state: RootState) => state.user.token);
+
+
+  // fetchUserAddress.ts
+
+  React.useEffect(() => {
+    const fetchUserAddress = async (token: string) => {
+      const query = `
+    query GetUserAddress {
+      getUserData {
+        address
+      }
+    }
+  `;
+
+      const response = await fetch(`${ENV.BASE_URL}/graphql`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`, // include JWT if your backend requires it
+        },
+        body: JSON.stringify({ query }),
+      });
+
+      const result = await response.json();
+      console.log(result);
+      return result.data.getUserData.address;
+    };
+    fetchUserAddress(token).then((address) => {
+      setAddress(address);
+      setLoading(false);
+    });
+
+  }, []);
+
+
+
+
   return (
     <View className='px-4 mt-4 flex flex-col gap-4 p-4 '>
       <View className='flex flex-row justify-between items-center'>
