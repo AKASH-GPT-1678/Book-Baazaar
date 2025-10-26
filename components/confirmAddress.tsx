@@ -64,9 +64,7 @@ const ConfirmAddress = () => {
       </View>
       <View>
         <Text className='pr-12 '>
-          Krishna store mumbra samrat nagar , Oppposite
-          Kunal kamra China singh dhoni
-          40061
+          {address}
         </Text>
 
       </View>
