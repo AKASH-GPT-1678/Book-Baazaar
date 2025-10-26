@@ -9,6 +9,9 @@ import ProductNotFound from "./productNotfound";
 import LoadingScreen from "./loadingScreen";
 import axios from "axios";
 import { ENV } from "@/data/ENV";
+import { ProductCard } from "./bookpattern";
+import { BookGrid } from "./charmproduct";
+
 
 interface Props {
 
@@ -78,51 +81,28 @@ const ReuseBooksView: React.FC<Props> = ({
           scrollEnabled={false}
 
           renderItem={({ item }) => (
-            <Pressable onPress={() => {
-              addView(item.id.toString());
-              router.push({
-                pathname: '/(zproduct)/[id]', // or whatever your actual route file is named
-                params: { id: item.id.toString() },
-              });
-            }}>
-              <View className=" w-[130px] p-1 mb-5"  >
-                <View className="bg-white rounded-xl shadow-sm p-2 relative h-[220px]">
-                  <Image
-                    source={{ uri: item.imageUrl }}
-                    className="h-[100px] w-full rounded-lg"
-                    resizeMode="cover"
+            // <ProductCard onPress={
+            //   () => {
+            //     addView(item.id.toString());
+            //     router.push({
+            //       pathname: '/(zproduct)/[id]', // or whatever your actual route file is named
+            //       params: { id: item.id.toString() },
+            //     });
+            //   }
+            // }
+            //   item={item}
 
-                  />
-
-                  <Pressable className="absolute top-[85px] right-2 bg-white border border-green-600 rounded px-2 py-0.5">
-                    <Text className="text-[10px] font-bold text-green-600">ADD</Text>
-                  </Pressable>
+            //   onAdd={() => console.log("hwlloworl")}
 
 
-                  <View className="mt-2">
-                    <Text className="text-[10px] text-gray-500">{item.author}</Text>
-                    <Text
-                      className="text-xs font-semibold text-gray-800"
-                      numberOfLines={1}
-                    >
-                      {item.title}
-                    </Text>
-                    <Text className="text-[10px] text-gray-500">
-                      {item.condition}
-                    </Text>
-                    <Ratings rating={4} />
-                    <Text className="text-sm font-bold text-green-700">
-                      ₹ {item.price}
-                    </Text>
-                  </View>
+            // />
 
-                  {/* Footer Tag */}
-                  <Text className="bg-green-100 text-[9px] text-center text-green-700 rounded-b-lg mt-2">
-                    See More Like This
-                  </Text>
-                </View>
-              </View>
-            </Pressable>
+            <View>
+              <BookGrid book={item} onBookPress={() => console.log("hello worl")} />
+          
+             
+            </View>
+
           )}
           ListFooterComponent={() => (
             <Pressable

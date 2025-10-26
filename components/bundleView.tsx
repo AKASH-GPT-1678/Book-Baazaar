@@ -6,11 +6,12 @@ import { router } from "expo-router";
 import { LoadBundles } from "@/data/bundles";
 import axios from "axios";
 import { ENV } from "@/data/ENV";
+import ProductNotFound from "./productNotfound";
 
 interface Props {
     heading1: string;
     heading2?: string;
- 
+
     category: string;
     autoFetch: boolean;
     seeAll: boolean;
@@ -48,11 +49,7 @@ const BundlesView: React.FC<Props> = ({
     if (loading) return <Text>Loading...</Text>;
     if (error) return <Text>Error loading data</Text>;
     if (!data || data.length === 0)
-        return (
-            <View>
-                <Text>No products found in this category.</Text>
-            </View>
-        );
+        return <ProductNotFound/>;
 
     return (
         <View className="mt-5">
