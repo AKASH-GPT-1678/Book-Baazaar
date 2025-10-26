@@ -2,7 +2,6 @@ import React from 'react';
 
 import { View, Text, Image, StyleSheet, ScrollView, TextInput, Pressable, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import ReuseBooksView from '@/components/booksdisplay';
 import { Picker } from '@react-native-picker/picker';
 import { bookCategories } from '@/data/mockBooks';
 import Footer from '@/components/footer';
@@ -17,9 +16,9 @@ const Bundles = () => {
 
 
     React.useEffect(() => {
-  
 
-        
+
+
     }, [activeCategory]);;
 
 
@@ -60,7 +59,7 @@ const Bundles = () => {
 
                 </View>
                 <View>
-                <BundlesView category={activeCategory} heading1='Hello' heading2='hello' autoFetch={true} seeAll={true} />
+                    <BundlesView category={activeCategory} heading1='Hello' heading2='hello' autoFetch={true} seeAll={true} />
 
                     <Footer />
 

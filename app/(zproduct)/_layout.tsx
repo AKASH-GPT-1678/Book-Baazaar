@@ -1,7 +1,5 @@
 import { Stack, Tabs } from 'expo-router';
 import React from 'react';
-import { Text } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function ProductLayout() {
 
@@ -11,7 +9,7 @@ export default function ProductLayout() {
     return (
 
         <Stack>
-        
+
 
             <Stack.Screen name='[id]' options={{ headerShown: false }} />
             <Stack.Screen name='category' options={{ headerShown: false, contentStyle: { backgroundColor: "white" } }} />

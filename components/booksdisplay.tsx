@@ -45,7 +45,15 @@ const ReuseBooksView: React.FC<Props> = ({
     }
 
   }
-  const { loading, data, error } = useFetch(() => LoadListings(category), autoFetch);
+  const { loading, data, error, refresh } = useFetch(() => LoadListings(category), autoFetch);
+
+  React.useEffect(() => {
+    console.log("Category changed:", category);
+    if (autoFetch) {
+      refresh();
+    }
+  }, [category]);
+
 
 
   if (error) return <ProductNotFound />

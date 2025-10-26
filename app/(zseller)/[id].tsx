@@ -17,4 +17,4 @@ const ListedProduct = () => {
 
 export default ListedProduct;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

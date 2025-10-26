@@ -32,11 +32,11 @@ const PurchasePage = () => {
     const [selctedquantity, setSelectedQuantity] = React.useState<string>("");
 
     async function placeOrder(productId: string, quantity: number) {
-        if(!isLoggedIn){
+        if (!isLoggedIn) {
             Alert.alert("login to make orders")
         }
         try {
-   
+
             const response = await axios.post(`${ENV.BASE_URL}/api/product/placeorder`, {
                 productId,
                 quantity,
@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         position: "absolute",
         bottom: 6,
-        backgroundColor: "white" // so it doesn’t overlap content invisibly
+        backgroundColor: "white"
     },
     bottomButton: {
         flex: 1,
