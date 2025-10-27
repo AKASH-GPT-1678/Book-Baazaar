@@ -81,27 +81,23 @@ const ReuseBooksView: React.FC<Props> = ({
           scrollEnabled={false}
 
           renderItem={({ item }) => (
-            // <ProductCard onPress={
-            //   () => {
-            //     addView(item.id.toString());
-            //     router.push({
-            //       pathname: '/(zproduct)/[id]', // or whatever your actual route file is named
-            //       params: { id: item.id.toString() },
-            //     });
-            //   }
-            // }
-            //   item={item}
+            <ProductCard onPress={
+              
+              () => {
+                addView(item.id.toString());
+                router.push({
+                  pathname: '/(zproduct)/[id]', // or whatever your actual route file is named
+                  params: { id: item.id.toString() },
+                });
+              }
+            }
+              item={item}
 
-            //   onAdd={() => console.log("hwlloworl")}
+              onAdd={() => console.log("hwlloworl")}
 
 
-            // />
+            />
 
-            <View>
-              <BookGrid book={item} onBookPress={() => console.log("hello worl")} />
-          
-             
-            </View>
 
           )}
           ListFooterComponent={() => (

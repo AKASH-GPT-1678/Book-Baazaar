@@ -15,10 +15,6 @@ import { ENV } from '@/data/ENV';
 import { router } from 'expo-router';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/store';
-interface quantityprops {
-    key: number;
-    quantity: number
-};
 
 const PurchasePage = () => {
 
@@ -26,9 +22,6 @@ const PurchasePage = () => {
     const [quantity, setQuantity] = React.useState<number>(2);
     const token = useSelector((state: RootState) => state.user.token);
     const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
-
-
-    const [seleted, setSelected] = React.useState("");
     const [selctedquantity, setSelectedQuantity] = React.useState<string>("");
 
     async function placeOrder(productId: string, quantity: number) {
@@ -54,7 +47,7 @@ const PurchasePage = () => {
             console.error("Error placing order:", error.response?.data || error.message);
             throw error;
         }
-    }
+    };
 
 
 

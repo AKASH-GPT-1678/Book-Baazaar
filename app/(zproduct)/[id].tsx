@@ -1,6 +1,6 @@
 import { FlatList, Pressable, StyleSheet, Text, View, ScrollView, Image } from 'react-native';
 import React from 'react';
-import { useLocalSearchParams, useSearchParams } from 'expo-router/build/hooks';
+import { useLocalSearchParams} from 'expo-router/build/hooks';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Entypo from '@expo/vector-icons/Entypo';
 import Feather from '@expo/vector-icons/Feather';
@@ -14,12 +14,39 @@ import ProductHighlights from '@/components/higlights';
 import DeliveryDetailsComponent from '@/components/deliveryDetails';
 import RatingsAndReviewsComponent from '@/components/reviews';
 import ProductNotFound from '@/components/productNotfound';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/store';
 
 const ProductView = () => {
 
-    const { id } = useLocalSearchParams(); // Changed this lin
+    const { id } = useLocalSearchParams();
     const [active, setActive] = React.useState(0);
     const dataPoints = Array.from({ length: 10 }, (_, i) => i + 1);
+    const token = useSelector((state: RootState) => state.user.token);
+
+    async function addToFavorites(listindId: string) {
+        try {
+
+            const response = await axios.post(`${ENV.BASE_URL}/api/product/favorite`, {
+                listingId: listindId
+            }, {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                }
+            });
+           
+
+
+        } catch (error) {
+            console.log(error);
+
+
+
+        }
+
+    };
+
 
     const loadProductById = async () => {
         try {
@@ -67,7 +94,7 @@ const ProductView = () => {
 
                         <View style={styles.imageWrapper}>
                             <View style={styles.iconWrapper}>
-                                <Entypo name="heart-outlined" size={24} color="black" style={styles.icon} />
+                                <Entypo name="heart-outlined" size={24} color="black" style={styles.icon} onPress={() => addToFavorites(data.id)} />
                                 <Feather name="send" size={24} color="black" style={styles.icon} />
                             </View>
                             <Image
@@ -92,13 +119,13 @@ const ProductView = () => {
                             ))}
                         </View>
 
-                  
+
                         <View style={styles.detailsWrapper}>
                             <Text style={styles.selectedColor}>
                                 Selected Color: <Text style={styles.colorValue}>Black</Text>
                             </Text>
 
-                     
+
                             <FlatList
                                 data={dataPoints}
                                 horizontal

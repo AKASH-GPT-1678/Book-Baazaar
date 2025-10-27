@@ -19,7 +19,7 @@ export const profileAssets = [
     {
         title: "Favourites",
         icon: <FontAwesome5 name="heart" size={24} color="black" />,
-        route: "/(zseller)"
+        route: "/profile"
     },
     {
         title: "Address",
